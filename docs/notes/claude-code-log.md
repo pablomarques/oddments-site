@@ -452,3 +452,15 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** remove the `--tms` / `html.theming` rules and the `animate` branch in `applyTheme`; restore `body`'s 300ms transition.
+
+## 2026-09-09 — Iteration 24: tooltips pop in
+
+**Was:** Tooltip faded in over 150ms while rising 4px.
+
+**Now:** Rest state is `translate(-50%, 6px) scale(0.8)` with the transform origin at the tail tip. On hover/focus it goes to full size over 320ms on an overshooting curve (`cubic-bezier(0.34, 1.56, 0.64, 1)`) while fading in over 160ms, so it pops up out of the button. Leaving uses a separate 120ms plain fade, so there is no bounce on the way out. Reduced-motion still disables all of it.
+
+**Why:** Pablo, 2026-09-09: *"on the little hover tooltips can you make them animate in."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** restore the 150ms transition and the `translate(-50%, 4px)` rest transform from commit `31bfc48`.
