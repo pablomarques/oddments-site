@@ -77,4 +77,6 @@ Later in the session: buttons pinned to the bottom of the viewport (32px margin)
 
 Then a run of button refinements: pinned to the bottom, solid quiet fills with no outline, an animated red dot marking the selected one, equal spacing around the dot, and a new YOU button for the visitor's own zone (decision 0003's button set is now five, not four). All in the CC log.
 
-Open from CC's side: exact colour values are estimated from the screenshot; the seconds-hand hold during a city wind is still as decision 0003 specifies.
+Later still: the dot became the sole active signal, and Pablo added an auto-cycle — the page now walks through the five buttons every 5s with a subtle countdown fill in the active button, until the visitor clicks. This changes the page's default behaviour from "local time, static" to "touring the zones"; it is Pablo's call and is not in decision 0003.
+
+Open from CC's side: exact colour values are estimated from the screenshot; the seconds-hand hold during a city wind is still as decision 0003 specifies; the countdown fill is very subtle at the current greys.

@@ -207,3 +207,19 @@ Decision 0003's button set was four; YOU is a Pablo addition. Position (first) i
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** re-add the `[aria-pressed="true"]` colour/background rule from commit `e3f6689`.
+
+## 2026-09-09 — Iteration 11: auto-cycle through the buttons with a countdown fill
+
+**Was:** Page opened on YOU and stayed there until clicked.
+
+**Now:** On load the page cycles YOU → LDN → NYC → SPO → ODD → YOU… every 5000ms (`CYCLE_MS`), each flip using the normal clockwise wind. While cycling, the active button's fill sweeps left→right over the 5s as a countdown: a `::before` pseudo-element whose width is `calc(var(--p) * 100%)`, set from the rAF loop; fill colour is the hover shade (`--button-hover`, #222 on #1C1C1C), so it is deliberately subtle. Any button click calls `stopCycling()`: cycling stops for the rest of the visit, the `cycling` class comes off `.controls`, and the fill is cleared. Label text is now wrapped in a `<span>` so it stacks above the fill.
+
+The visitor's click still follows the existing rules (click a city → that city; click the active one → YOU). Note that if the click lands on a button the cycle has just moved onto, that reads as "click the active one" and returns to YOU. Observed once during testing; it is the rule working as designed, but worth knowing.
+
+Decision 0003 has no auto-cycle; this is a Pablo addition.
+
+**Why:** Pablo, 2026-09-09: *"make the time now cycle between the different places every 5 seconds unless the user clicks a button … also use the background of the active button as a little progressbar."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** remove `stepCycle`/`stopCycling`/`activeButton`, the `cycling` state and class, the `::before` rules, and unwrap the label spans. Commit `af51b1f` is the last pre-cycle version.
