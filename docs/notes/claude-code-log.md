@@ -105,3 +105,15 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** clock width back to `min(72vmin, 520px)`, `y2` back to 32, caption 17px/48px, controls 40px.
+
+## 2026-09-09 — Iteration 3: buttons pinned to the bottom of the viewport
+
+**Was:** Buttons in normal flow, 24px below the caption, the whole stack centred.
+
+**Now:** `.controls` is `position: fixed`, centred horizontally, `bottom: calc(32px + env(safe-area-inset-bottom))`. Clock and caption remain centred in the viewport as a group.
+
+**Why:** Pablo, 2026-09-09: *"align the buttons to the bottom of the page with a certain margin."* Margin value 32px is CC's pick; one number to change.
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** restore the previous `.controls` block (static, `margin: 24px 0 0`).
