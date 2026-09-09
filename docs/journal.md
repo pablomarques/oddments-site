@@ -83,4 +83,6 @@ Pablo then noticed the seconds-hand hold during a wind (the consequence CC flagg
 
 End of session: Pablo promoted the current build to production and then to `oddments.design` (with `www` redirecting to the apex). **The holding page is live at its official address as of 2026-09-09.** `oddments.studio` remains unattached pending Pablo's word.
 
-Open from CC's side: exact colour values are estimated from the screenshot; the countdown fill grey is a single token; `oddments.studio` redirect not yet set up.
+Then two more: a mobile breakpoint (promoted to production so Pablo could check it on his phone), and a day/night toggle in the top-right so Pablo can compare palettes. The toggle is a comparison tool; whether it stays is undecided.
+
+Open from CC's side: exact colour values are estimated from the screenshot; the countdown fill grey is a single token; `oddments.studio` redirect not yet set up; fate of the day/night toggle.

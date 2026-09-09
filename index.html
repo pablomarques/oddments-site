@@ -15,10 +15,19 @@
     --progress: #2C2C2C;
     --accent: #E24B4A;
   }
+  :root[data-theme="day"] {
+    --paper: #ECEAE5;
+    --ink: #161616;
+    --muted: #8C8C8C;
+    --button: #E3E1DC;
+    --button-hover: #DAD8D2;
+    --progress: #CFCDC6;
+  }
   html, body { height: 100%; margin: 0; }
   body {
     background: var(--paper);
     color: var(--ink);
+    transition: background-color 300ms ease, color 300ms ease;
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -57,7 +66,7 @@
     padding: 0;
     list-style: none;
   }
-  .controls button {
+  .controls button, .theme button {
     position: relative;
     overflow: hidden;
     display: inline-flex;
@@ -75,7 +84,7 @@
     cursor: pointer;
     transition: color 150ms ease, background-color 150ms ease;
   }
-  .controls button:hover { color: var(--ink); background: var(--button-hover); }
+  .controls button:hover, .theme button:hover { color: var(--ink); background: var(--button-hover); }
   /* While auto-cycling, the active button's fill sweeps left→right as a countdown. */
   .controls button::before {
     content: "";
@@ -86,6 +95,16 @@
     pointer-events: none;
   }
   .controls:not(.cycling) button::before { display: none; }
+  /* Day/night toggle: same pill, top-right, no progress fill. */
+  .theme {
+    position: fixed;
+    top: calc(32px + env(safe-area-inset-top, 0px));
+    right: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .theme button::before { display: none; }
   .controls button > * { position: relative; }
   /* Selected-state marker: a terminal-style dot that slides open before the label. */
   .controls .dot {
@@ -113,17 +132,21 @@
   @media (max-width: 600px) {
     .clock { width: 252px; }
     .controls { gap: 8px; }
-    .controls button { font-size: 12px; padding: 7px 10px; }
+    .controls button, .theme button { font-size: 12px; padding: 7px 10px; }
     .controls .dot { height: 6px; }
     .controls button[aria-pressed="true"] .dot { width: 6px; margin-right: 10px; }
   }
-  .controls button:focus-visible {
+  .controls button:focus-visible, .theme button:focus-visible {
     outline: 1px solid var(--ink);
     outline-offset: 2px;
   }
 </style>
 </head>
 <body>
+
+<ul class="theme">
+  <li><button type="button" id="theme-toggle" aria-pressed="false" aria-label="Switch between night and day mode"><span>NIGHT</span></button></li>
+</ul>
 
 <svg class="clock" viewBox="0 0 180 180" role="img" aria-labelledby="clock-title" aria-describedby="clock-desc">
   <title id="clock-title">Oddments</title>
@@ -168,6 +191,7 @@
   var secondsEl = document.getElementById('seconds');
   var buttons   = Array.prototype.slice.call(document.querySelectorAll('.controls button'));
   var controlsEl = document.getElementById('controls');
+  var themeBtn  = document.getElementById('theme-toggle');
 
   // --- Constants (decision 0003) --------------------------------------------
   var LOCAL_ZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -333,6 +357,21 @@
       var key = b.dataset.zone;
       setZone(key === selected ? 'local' : key);
     });
+  });
+
+  // --- Day / night ----------------------------------------------------------
+  function applyTheme(theme) {
+    if (theme === 'day') document.documentElement.setAttribute('data-theme', 'day');
+    else document.documentElement.removeAttribute('data-theme');
+    themeBtn.querySelector('span').textContent = theme === 'day' ? 'DAY' : 'NIGHT';
+    themeBtn.setAttribute('aria-pressed', theme === 'day' ? 'true' : 'false');
+    try { localStorage.setItem('oddments-theme', theme); } catch (e) {}
+  }
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('oddments-theme'); } catch (e) {}
+  applyTheme(savedTheme === 'day' ? 'day' : 'night');
+  themeBtn.addEventListener('click', function () {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'day' ? 'night' : 'day');
   });
 
   markPressed();

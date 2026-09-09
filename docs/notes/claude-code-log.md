@@ -298,3 +298,17 @@ Decision 0003 has no auto-cycle; this is a Pablo addition.
 **Why:** Pablo, 2026-09-09: *"push to live so i can see it on my phone."*
 
 **If reverting:** `vercel rollback`.
+
+## 2026-09-09 — Iteration 15: day/night toggle
+
+**Was:** Night palette only.
+
+**Now:** A pill in the top-right corner (32px from top and right, same styling as the zone buttons, no countdown fill) labelled NIGHT or DAY for the current mode. Clicking flips `data-theme="day"` on `<html>`, which swaps the six colour tokens; the red accent is shared. Background and text colours cross-fade over 300ms. Choice persists in `localStorage` (`oddments-theme`); default is night. Day palette is the night one mirrored: ground `#ECEAE5`, ink `#161616`, muted `#8C8C8C`, buttons `#E3E1DC` / hover `#DAD8D2` / progress `#CFCDC6`.
+
+Built as a comparison tool for Pablo. Whether it ships, or whether the site follows `prefers-color-scheme` instead, is open.
+
+**Why:** Pablo, 2026-09-09: *"can you give me a toggle so i can see a night mode vs day mode on this."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** remove the `.theme` list, its CSS, the `:root[data-theme="day"]` block, and the Day/night section of the script.
