@@ -378,3 +378,15 @@ Built as a comparison tool for Pablo. Whether it ships, or whether the site foll
 **Why:** Pablo, 2026-09-09: *"push live."*
 
 **If reverting:** `vercel rollback`.
+
+## 2026-09-09 — Iteration 20: wordmark removed for now
+
+**Was:** `●◗◗ments` top-left, with Inter and Noto Sans Symbols 2 loaded from Google Fonts.
+
+**Now:** Wordmark element, its CSS, and all four font-related `<link>` tags removed. The page makes no external requests again. The AM/PM capsule is now the only thing in the top corners.
+
+**Why:** Pablo, 2026-09-09: *"you can remove the logo for now."* "For now" — the font research (Iteration 19) stands and the markup is in commit `b0d2d6c` when it returns.
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** restore the links, `.wordmark` rules and `<p class="wordmark">` from `b0d2d6c`.
