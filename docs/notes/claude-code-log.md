@@ -464,3 +464,15 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** restore the 150ms transition and the `translate(-50%, 4px)` rest transform from commit `31bfc48`.
+
+## 2026-09-09 — Iteration 25: night ground 10% darker
+
+**Was:** `--paper: #161616` (value 22).
+
+**Now:** `--paper: #141414` (value 20). Button fills unchanged (`#1C1C1C` / `#222222` / `#2C2C2C`), so they sit slightly higher off the ground. Day palette untouched. The Apple touch icon tile still uses `#161616`; not worth regenerating for two levels.
+
+**Why:** Pablo, 2026-09-09: *"can you increase the darkness of the background a little bit? like 10%."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** `--paper` back to `#161616`.
