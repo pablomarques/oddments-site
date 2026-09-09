@@ -77,14 +77,6 @@
     outline: 1px solid var(--ink);
     outline-offset: 2px;
   }
-  .caption {
-    margin: 32px 0 0;
-    font-size: 13px;
-    letter-spacing: 0.02em;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-    min-height: 1.2em;
-  }
 </style>
 </head>
 <body>
@@ -114,8 +106,6 @@
   <line id="seconds" class="seconds" x1="90" y1="70" x2="90" y2="38" transform="rotate(0 90 90)"/>
 </svg>
 
-<p class="caption" id="caption" aria-live="off"></p>
-
 <ul class="controls" aria-label="Time zone">
   <li><button type="button" data-zone="Europe/London"     aria-pressed="false">LDN</button></li>
   <li><button type="button" data-zone="America/New_York"  aria-pressed="false">NYC</button></li>
@@ -131,12 +121,10 @@
   var hourEl    = document.getElementById('hour');
   var minuteEl  = document.getElementById('minute');
   var secondsEl = document.getElementById('seconds');
-  var captionEl = document.getElementById('caption');
   var buttons   = Array.prototype.slice.call(document.querySelectorAll('.controls button'));
 
   // --- Constants (decision 0003) --------------------------------------------
   var LOCAL_ZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  var LABELS = { 'Europe/London': 'LDN', 'America/New_York': 'NYC', 'America/Sao_Paulo': 'SPO', 'ODD': 'ODD' };
   var TWEEN_MS = 1100;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -194,7 +182,6 @@
   var zone = LOCAL_ZONE;                 // active zone; LOCAL_ZONE when nothing pressed
   var cur = { h: 0, m: 0, s: 0 };        // displayed angles, unwrapped, monotonically increasing
   var tween = null;                      // { start:{h,m,s}, delta:{h,m,s}, t0 }
-  var lastCaptionSecond = -1;
 
   (function init() {
     var a = anglesFor(zone, Date.now());
@@ -205,17 +192,6 @@
     hourEl.setAttribute('transform',    'rotate(' + cur.h + ' 90 90)');
     minuteEl.setAttribute('transform',  'rotate(' + cur.m + ' 90 90)');
     secondsEl.setAttribute('transform', 'rotate(' + cur.s + ' 90 90)');
-  }
-
-  function pad(n) { return (n < 10 ? '0' : '') + n; }
-
-  function updateCaption(now) {
-    var t = readTime(zone, now);
-    var whole = Math.floor(t.s);
-    if (whole === lastCaptionSecond) return;
-    lastCaptionSecond = whole;
-    var label = zone === LOCAL_ZONE ? 'LOCAL' : LABELS[zone];
-    captionEl.textContent = label + ' ' + pad(t.h) + ':' + pad(t.m);
   }
 
   // Advance the displayed angles to the live target, always moving forward.
@@ -238,7 +214,6 @@
       stepLive(Date.now());
     }
     render();
-    updateCaption(Date.now());
     window.requestAnimationFrame(frame);
   }
 
@@ -248,8 +223,6 @@
     buttons.forEach(function (b) {
       b.setAttribute('aria-pressed', b.dataset.zone === zone ? 'true' : 'false');
     });
-    lastCaptionSecond = -1;
-
     var a = anglesFor(zone, Date.now());
     var delta = {
       h: forward(a.h, cur.h),

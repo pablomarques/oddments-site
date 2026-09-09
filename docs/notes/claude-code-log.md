@@ -117,3 +117,17 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** restore the previous `.controls` block (static, `margin: 24px 0 0`).
+
+## 2026-09-09 — Iteration 4: text caption removed
+
+**Was:** Caption between clock and buttons showing zone label and HH:MM.
+
+**Now:** No caption. Element, its CSS, and the `updateCaption` / `LABELS` / `pad` code are gone. The active zone is signalled only by the pressed button (`aria-pressed` plus accent styling). The clock is now the only thing centred in the viewport.
+
+**Why:** Pablo, 2026-09-09: *"remove the text clock."*
+
+**⚠ Touches a locked decision.** Decision 0003 specifies "a small caption below the clock shows the active zone label and the time." Removed on Pablo's direct instruction; SC to amend 0003 alongside the seconds-hand change in 0002 (see Iteration 2).
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** restore from commit `e200038` (last version with the caption).
