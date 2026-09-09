@@ -47,3 +47,15 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** Vercel account state (project `oddments` now exists, no deployments). Nothing outside this project's own deploy path.
 
 **If reverting:** `vercel project rm oddments`; delete `.vercel/`, `.env.local`; `rm -rf .git`.
+
+## 2026-09-09 — First production deployment, on Pablo's explicit yes
+
+**Was:** Vercel project `oddments` with no deployments (see previous entry).
+
+**Now:** Production deployment `oddments-bdf14n3gt-pabs-studio.vercel.app`, publicly reachable at `https://oddments-pi.vercel.app`. Served HTML is byte-identical to `index.html` [VERIFIED: `curl | diff`]. Project docs return 404 [VERIFIED: four paths]. No custom domain attached.
+
+**Why:** Vercel forces a project's first deployment to Production. Pablo, 2026-09-08: *"its all good if it publicaly reachable no one knows that url and we will have something live soon."* That is a yes for the page at the `vercel.app` alias only. Attaching `oddments.design` / `oddments.studio` remains gated on a separate explicit yes (decision 0004).
+
+**Affects:** Vercel account state only. This project's deploy path is now: `vercel deploy` → Preview (login-gated); `vercel deploy --prod` → Production (public at the alias above).
+
+**If reverting:** `vercel remove <deployment-url> --yes`. The alias goes 404 once no production deployment exists.

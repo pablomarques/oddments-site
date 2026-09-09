@@ -53,8 +53,8 @@ Two things for SC, both recorded in the log: a reference-frame wording wrinkle i
 
 ### Deploy path
 
-Vercel project `oddments` created and linked. Preview deployment is blocked: Vercel forces a project's first deployment to Production, and the production alias is publicly reachable. Three deployments were created and removed within minutes to keep the publish gate intact. Awaiting Pablo's call on how to seed the mandatory first production deployment.
+Vercel project `oddments` created and linked. Preview deployment is blocked: Vercel forces a project's first deployment to Production, and the production alias is publicly reachable. Three deployments were created and removed within minutes to keep the publish gate intact. Pablo's call (2026-09-08, late): fine for the page to be publicly reachable at the anonymous `vercel.app` alias. First production deployment made 2026-09-09; live at `https://oddments-pi.vercel.app`. Custom domains still unattached and still gated. Subsequent plain deploys land in Preview, so the iteration surface Pablo chose now works.
 
 ### State
 
-Build believed complete from CC's side, pending SC verification and Pablo's confirmation of the switch to iteration. Deploy path built, not fired.
+Build believed complete from CC's side, pending SC verification and Pablo's confirmation of the switch to iteration. Deploy path built and exercised: production at the vercel.app alias, previews for iteration, domains not yet connected.
