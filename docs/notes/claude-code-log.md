@@ -29,3 +29,21 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** This project only.
 
 **If reverting:** delete `index.html`. No other files depend on it.
+
+## 2026-09-08 — Git repo initialised, Vercel project created, preview deploy blocked by Vercel's first-deployment rule
+
+**Was:** No repo, no Vercel project.
+
+**Now:**
+- Local git repo at project root, branch `main`, first commit `d49ff12`. No remote.
+- Vercel project `oddments` under team pabs-studio, linked from this folder (`.vercel/project.json`, gitignored). Framework preset "Other", output directory `.`. `vercel link` also wrote `.env.local` (a Vercel OIDC token) and added `.env*` to `.gitignore`; both are CLI side-effects, not project files, and neither is committed.
+- `.vercelignore` restricts every upload to `index.html` only. Verified on the first deploy: only the page was uploaded (`Builds: .`, single file).
+- **No deployment exists right now.** Three were created and all three were removed within minutes, see below.
+
+**Why the removals:** every `vercel deploy` — plain, with `--target preview`, and from a non-main branch — landed in the *Production* environment with the public alias `oddments-pi.vercel.app`, which answered 200 with the page. That breaches decision 0004's publish gate (no public reachability without Pablo's yes), so each was removed as soon as it was seen. Vercel's documentation states the cause: *"The first deployment of a new project is always a production deployment, even when you omit `--prod`."* Removing the deployment resets the project to "no first deployment", so the next one is production again. A preview deployment is therefore impossible until a production deployment exists on the project. Escalated to Pablo.
+
+**Deployment protection observed [VERIFIED: curl]:** unique deployment URLs (`oddments-xxxx-pabs-studio.vercel.app`) redirect to Vercel SSO (302), i.e. previews require a Vercel login to view. The production alias (`oddments-pi.vercel.app`) is public.
+
+**Affects:** Vercel account state (project `oddments` now exists, no deployments). Nothing outside this project's own deploy path.
+
+**If reverting:** `vercel project rm oddments`; delete `.vercel/`, `.env.local`; `rm -rf .git`.

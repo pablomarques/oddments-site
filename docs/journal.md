@@ -28,3 +28,33 @@ An earlier CC brief was written in that chat but landed in the Claude sandbox ra
 ### Next
 
 SC I authors CC's boot prompt and the build brief, pointing at this project's `CLAUDE.md` canonical section rather than restating paths. Blocking questions in `open-questions.md` items 1–3 need answers from Pablo first.
+
+---
+
+## 2026-09-08 — CC I boots. Build done locally; deploy path blocked on a Vercel rule.
+
+**CC I**
+
+### Pablo's answers to the blocking questions
+
+1. Domains: both `oddments.design` and `oddments.studio`; `.design` is official.
+2. Stack: single static `index.html`, no framework, no build step. Confirmed ("keep it light").
+3. Repo: local git repo, yes. Initialised.
+4. Iteration surface: Vercel preview deployments.
+5. Colours and other unspecified details: CC defaults, iterate later.
+
+Answers annotated inline in `open-questions.md` items 1–3 for SC to turn into decision files.
+
+### Build
+
+`index.html` written and verified against decisions 0001–0003 in a browser: live local time correct to the formulas, ODD lands all three hands at 0° via clockwise travel, LDN wind lands on London time with unwrapped angles still increasing, `aria-pressed` and caption behave. Detail and CC's default choices in `docs/notes/claude-code-log.md`.
+
+Two things for SC, both recorded in the log: a reference-frame wording wrinkle in decision 0003 (0° vs 97.5°), and a visible consequence of "live updates pause during the tween" — the seconds hand holds for 1.1s on a city switch, then catches up.
+
+### Deploy path
+
+Vercel project `oddments` created and linked. Preview deployment is blocked: Vercel forces a project's first deployment to Production, and the production alias is publicly reachable. Three deployments were created and removed within minutes to keep the publish gate intact. Awaiting Pablo's call on how to seed the mandatory first production deployment.
+
+### State
+
+Build believed complete from CC's side, pending SC verification and Pablo's confirmation of the switch to iteration. Deploy path built, not fired.

@@ -5,8 +5,11 @@ Active questions awaiting SC or Pablo. Resolved items move into a decision file 
 ## Blocking the CC brief
 
 1. **Which domain(s)?** Pablo referred to "the domain(s)" plural. `oddments.design` is the known primary label address, but the set has not been confirmed, nor whether others redirect to it.
+   *Answered by Pablo 2026-09-08 (to CC):* both `oddments.design` and `oddments.studio`; `.design` is the official one. Both are registered on Vercel under pabs-studio [VERIFIED: `vercel domains ls`]. Redirect direction implied (.studio → .design), not stated. Awaiting decision file from SC.
 2. **Stack.** SC I's working recommendation is a single static `index.html` with no framework and no build step, on the grounds that it is the fastest thing to iterate on and the page is one object. Not yet put to Pablo as a direct question. Vercel as the deploy target *is* confirmed.
+   *Answered by Pablo 2026-09-08 (to CC):* keep it light — single static `index.html` confirmed. Built that way. Awaiting decision file from SC.
 3. **Repo.** Does this project get its own git repo, and is it connected to Vercel via git or deployed directly? Unverified — check before asserting either way (Pattern #23).
+   *Answered by Pablo 2026-09-08 (to CC):* local git repo, yes. CC initialised it at project root and linked the folder to a new Vercel project `oddments` (pabs-studio) deployed directly via CLI, not via a git integration. Iteration runs against Vercel preview deployments (Pablo's choice). No GitHub remote yet — not asked for. Awaiting decision file from SC.
 
 ## Design, non-blocking
 
