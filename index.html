@@ -12,6 +12,7 @@
     --muted: #8C8C8C;
     --button: #1C1C1C;
     --button-hover: #222222;
+    --progress: #2C2C2C;
     --accent: #E24B4A;
   }
   html, body { height: 100%; margin: 0; }
@@ -81,7 +82,7 @@
     position: absolute;
     inset: 0;
     width: calc(var(--p, 0) * 100%);
-    background: var(--button-hover);
+    background: var(--progress);
     pointer-events: none;
   }
   .controls:not(.cycling) button::before { display: none; }

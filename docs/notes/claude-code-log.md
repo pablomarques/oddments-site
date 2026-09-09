@@ -223,3 +223,15 @@ Decision 0003 has no auto-cycle; this is a Pablo addition.
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** remove `stepCycle`/`stopCycling`/`activeButton`, the `cycling` state and class, the `::before` rules, and unwrap the label spans. Commit `af51b1f` is the last pre-cycle version.
+
+## 2026-09-09 — Iteration 12: countdown fill more visible
+
+**Was:** Fill used the hover shade `#222222` on a `#1C1C1C` button.
+
+**Now:** New token `--progress: #2C2C2C` for the fill. Hover shade unchanged.
+
+**Why:** Pablo, 2026-09-09: *"can you make the progress bar a little bit more visible."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** point the `::before` background back at `--button-hover` and drop the token.
