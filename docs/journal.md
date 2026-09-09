@@ -81,4 +81,6 @@ Later still: the dot became the sole active signal, and Pablo added an auto-cycl
 
 Pablo then noticed the seconds-hand hold during a wind (the consequence CC flagged at build) and asked for it to keep moving. Done: live time now runs through the wind. Third locked-decision item changed by Pablo directly (0003, "live updates pause during the tween"); all three flagged in the CC log for SC.
 
-Open from CC's side: exact colour values are estimated from the screenshot; the countdown fill grey is a single token.
+End of session: Pablo promoted the current build to production and then to `oddments.design` (with `www` redirecting to the apex). **The holding page is live at its official address as of 2026-09-09.** `oddments.studio` remains unattached pending Pablo's word.
+
+Open from CC's side: exact colour values are estimated from the screenshot; the countdown fill grey is a single token; `oddments.studio` redirect not yet set up.

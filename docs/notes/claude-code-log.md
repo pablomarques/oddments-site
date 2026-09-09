@@ -263,3 +263,18 @@ Decision 0003 has no auto-cycle; this is a Pablo addition.
 **Affects:** Vercel production state only.
 
 **If reverting:** `vercel rollback` to the previous production deployment, or `vercel promote <previous-url>`.
+
+## 2026-09-09 — oddments.design attached to production
+
+**Was:** Production reachable only at `oddments-pi.vercel.app`. Both Oddments domains registered on Vercel but unattached.
+
+**Now:**
+- `oddments.design` → project `oddments` production. HTTPS 200, served HTML byte-identical to `index.html` [VERIFIED: `curl | diff`]. HTTP → HTTPS 308.
+- `www.oddments.design` → 308 redirect to `https://oddments.design/`, set via the Vercel API (`PATCH /v9/projects/oddments/domains/www.oddments.design`, `redirect: oddments.design`, `redirectStatusCode: 308`). Not a config file; nothing to redeploy.
+- `oddments.studio` **not** attached. Pablo's instruction named `.design` only; `.studio` (and its redirect to `.design`, which Pablo implied on 2026-09-08) waits for a separate yes.
+
+**Why:** Pablo, 2026-09-09: *"promote to oddments.design."* Explicit yes for that domain. The `www` attachment is CC's judgement as part of the same domain.
+
+**Affects:** Public web. The holding page is now live at its official address.
+
+**If reverting:** `vercel domains rm oddments.design` and `vercel domains rm www.oddments.design` (detaches from the project; the registrations stay).
