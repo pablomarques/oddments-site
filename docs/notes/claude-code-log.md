@@ -312,3 +312,15 @@ Built as a comparison tool for Pablo. Whether it ships, or whether the site foll
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** remove the `.theme` list, its CSS, the `:root[data-theme="day"]` block, and the Day/night section of the script.
+
+## 2026-09-09 — Iteration 16: toggle reads AM / PM
+
+**Was:** Toggle labelled NIGHT / DAY.
+
+**Now:** PM for the dark palette, AM for the light one. Behaviour unchanged; `localStorage` key and `data-theme="day"` value unchanged.
+
+**Why:** Pablo, 2026-09-09: *"can you just make it say AM or PM."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** two string changes in the toggle markup and `applyTheme`.

@@ -145,7 +145,7 @@
 <body>
 
 <ul class="theme">
-  <li><button type="button" id="theme-toggle" aria-pressed="false" aria-label="Switch between night and day mode"><span>NIGHT</span></button></li>
+  <li><button type="button" id="theme-toggle" aria-pressed="false" aria-label="Switch between PM (dark) and AM (light) mode"><span>PM</span></button></li>
 </ul>
 
 <svg class="clock" viewBox="0 0 180 180" role="img" aria-labelledby="clock-title" aria-describedby="clock-desc">
@@ -363,7 +363,7 @@
   function applyTheme(theme) {
     if (theme === 'day') document.documentElement.setAttribute('data-theme', 'day');
     else document.documentElement.removeAttribute('data-theme');
-    themeBtn.querySelector('span').textContent = theme === 'day' ? 'DAY' : 'NIGHT';
+    themeBtn.querySelector('span').textContent = theme === 'day' ? 'AM' : 'PM';
     themeBtn.setAttribute('aria-pressed', theme === 'day' ? 'true' : 'false');
     try { localStorage.setItem('oddments-theme', theme); } catch (e) {}
   }
