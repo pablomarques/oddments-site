@@ -290,3 +290,11 @@ Decision 0003 has no auto-cycle; this is a Pablo addition.
 **Affects:** `index.html` only. Preview deployed; production (oddments.design) untouched.
 
 **If reverting:** delete the `@media (max-width: 600px)` block.
+
+## 2026-09-09 — Promoted iteration 14 to production
+
+**Now:** oddments.design serves commit `651eb5f` (mobile breakpoint included). Deployment `oddments-3oiavogzm-pabs-studio.vercel.app`. Byte-identical to `index.html` [VERIFIED: `curl | diff`].
+
+**Why:** Pablo, 2026-09-09: *"push to live so i can see it on my phone."*
+
+**If reverting:** `vercel rollback`.
