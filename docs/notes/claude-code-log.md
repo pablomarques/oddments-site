@@ -426,3 +426,15 @@ Safari on macOS ignores SVG favicons and shows the touch icon instead. Open ques
 **Why:** Pablo, 2026-09-09: *"promote."*
 
 **If reverting:** `vercel rollback`.
+
+## 2026-09-09 — Iteration 22: rollover tooltips on the zone buttons
+
+**Was:** No tooltips.
+
+**Now:** Each `<li>` carries a `<span class="tip" role="tooltip">` after its button: an inverted pill (ink fill, paper text, 10px uppercase letter-spaced like the buttons) 10px above the button, centred, with a 4px CSS-border triangle tail pointing down. Fades in and rises 4px over 150ms on `li:hover` and on keyboard focus of the button; only inside `@media (hover: hover)` so touch devices never get a stuck tooltip after a tap. Texts: London, New York, São Paulo, 3:15 for ODD, and for YOU the visitor's own city derived from the IANA zone id (`America/New_York` → "New York"), falling back to "You" when the id has no city part.
+
+**Why:** Pablo, 2026-09-09: *"add a nice tooltip on rollover on each of the buttons that say the name of the city … a small floating pill with a kind of point built into the shape pointing down."* "3:15" for ODD and the visitor's-city for YOU are CC's choices.
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** remove the five `.tip` spans, the tooltip CSS block, and the `tip-local` IIFE.
