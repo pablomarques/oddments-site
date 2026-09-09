@@ -418,3 +418,11 @@ Safari on macOS ignores SVG favicons and shows the touch icon instead. Open ques
 **Affects:** `index.html` only (now ~20KB, mostly the PNG). Preview deployed; production untouched.
 
 **If reverting:** delete the two `<link rel="icon"…>` / `<link rel="apple-touch-icon"…>` lines.
+
+## 2026-09-09 — Promoted iteration 21 to production
+
+**Now:** oddments.design serves commit `0229201` (wordmark removed, favicon and touch icon added). Deployment `oddments-ay7qs27iu-pabs-studio.vercel.app`. Byte-identical to `index.html` [VERIFIED: `curl | diff`].
+
+**Why:** Pablo, 2026-09-09: *"promote."*
+
+**If reverting:** `vercel rollback`.
