@@ -88,3 +88,20 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** `index.html` only. Deployed as a Vercel preview, production untouched.
 
 **If reverting:** restore the five CSS token values, move `<p class="caption">` back below `<ul class="controls">`, reinstate `:SS` in `updateCaption`.
+
+## 2026-09-09 — Iteration 2: fixed clock size, shorter seconds hand
+
+**Was:** Clock at `min(72vmin, 520px)`; seconds line `y1=70 y2=32` (radius 20→58), whose tip reached the numeral glyphs.
+
+**Now:**
+- Clock fixed at **216px** wide on every screen. At 1.2px per viewBox unit the numerals (font-size 10 units) render at exactly 12px, which was Pablo's target. Everything inside the SVG scales with it; the locked geometry is untouched.
+- Seconds line now `y2=38` (radius 20→52), flush with the minute hand's outer edge, leaving ~5 units to the numeral glyphs. Measured from Pablo's reference screenshot, where the line ends at about radius 52.
+- Caption 13px, 32px below the clock; buttons unchanged, 24px below the caption.
+
+**Why:** Pablo, 2026-09-09: *"red pointer should not touch the numbers and everything needs to be a lot smaller, reduce the whole thing proportionally … until the typeface for the numbers are 12px in size."*
+
+**⚠ Touches a locked number.** Decision 0002 specifies the seconds hand as `y2="32"`. Pablo asked for the change directly, so it is implemented, not quietly overridden — SC should amend 0002 (seconds line 70→38) at the next checkpoint. Also worth noting for SC: `understanding.md` says numerals fail below ~200px; at 216px they hold at 12px, so that figure is confirmed close to the edge.
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** clock width back to `min(72vmin, 520px)`, `y2` back to 32, caption 17px/48px, controls 40px.

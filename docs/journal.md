@@ -71,4 +71,6 @@ Pablo supplied a screenshot of the prototype render as the colour and layout ref
 
 Also this session: GitHub repo `pablomarques/oddments-site` created (public, on Pablo's instruction), `main` pushed. Vercel deliberately not git-connected so production stays behind the publish gate.
 
+Session 1 continued: Pablo asked for the clock much smaller (numerals at 12px → clock fixed at 216px) and the seconds hand shortened so it clears the numerals. The second one changes a number locked in decision 0002; done on Pablo's direct instruction and flagged in the CC log for SC to amend the decision file.
+
 Open from CC's side: exact colour values are estimated from the screenshot; the seconds-hand hold during a city wind is still as decision 0003 specifies.
