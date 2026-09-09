@@ -75,4 +75,6 @@ Session 1 continued: Pablo asked for the clock much smaller (numerals at 12px â†
 
 Later in the session: buttons pinned to the bottom of the viewport (32px margin), then the text caption removed entirely on Pablo's instruction â€” a second locked item (decision 0003) changed by Pablo directly, flagged in the CC log for SC.
 
+Then a run of button refinements: pinned to the bottom, solid quiet fills with no outline, an animated red dot marking the selected one, equal spacing around the dot, and a new YOU button for the visitor's own zone (decision 0003's button set is now five, not four). All in the CC log.
+
 Open from CC's side: exact colour values are estimated from the screenshot; the seconds-hand hold during a city wind is still as decision 0003 specifies.

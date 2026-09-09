@@ -132,6 +132,7 @@
 </svg>
 
 <ul class="controls" aria-label="Time zone">
+  <li><button type="button" data-zone="local"             aria-pressed="false"><span class="dot" aria-hidden="true"></span>YOU</button></li>
   <li><button type="button" data-zone="Europe/London"     aria-pressed="false"><span class="dot" aria-hidden="true"></span>LDN</button></li>
   <li><button type="button" data-zone="America/New_York"  aria-pressed="false"><span class="dot" aria-hidden="true"></span>NYC</button></li>
   <li><button type="button" data-zone="America/Sao_Paulo" aria-pressed="false"><span class="dot" aria-hidden="true"></span>SPO</button></li>
@@ -204,7 +205,8 @@
   }
 
   // --- State ----------------------------------------------------------------
-  var zone = LOCAL_ZONE;                 // active zone; LOCAL_ZONE when nothing pressed
+  var selected = 'local';                // which button is pressed: 'local', a zone id, or 'ODD'
+  var zone = LOCAL_ZONE;                 // the zone that selection resolves to
   var cur = { h: 0, m: 0, s: 0 };        // displayed angles, unwrapped, monotonically increasing
   var tween = null;                      // { start:{h,m,s}, delta:{h,m,s}, t0 }
 
@@ -243,11 +245,19 @@
   }
 
   // --- Zone switching -------------------------------------------------------
-  function setZone(next) {
-    zone = next;
+  // Buttons carry a key; "local" stands for the visitor's own zone. Selection is
+  // tracked by key, not by resolved zone, so YOU and a city that happens to be the
+  // visitor's own zone never light up together.
+  function markPressed() {
     buttons.forEach(function (b) {
-      b.setAttribute('aria-pressed', b.dataset.zone === zone ? 'true' : 'false');
+      b.setAttribute('aria-pressed', b.dataset.zone === selected ? 'true' : 'false');
     });
+  }
+
+  function setZone(key) {
+    selected = key;
+    zone = key === 'local' ? LOCAL_ZONE : key;
+    markPressed();
     var a = anglesFor(zone, Date.now());
     var delta = {
       h: forward(a.h, cur.h),
@@ -265,11 +275,12 @@
 
   buttons.forEach(function (b) {
     b.addEventListener('click', function () {
-      var target = b.dataset.zone;
-      setZone(target === zone ? LOCAL_ZONE : target);
+      var key = b.dataset.zone;
+      setZone(key === selected ? 'local' : key);
     });
   });
 
+  markPressed();
   render();
   window.requestAnimationFrame(frame);
 })();

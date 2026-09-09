@@ -167,3 +167,19 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** padding back to `5px 10px`, dot `margin-right` back to 6px.
+
+## 2026-09-09 — Iteration 8: YOU button for the visitor's local time
+
+**Was:** Four buttons (LDN, NYC, SPO, ODD). Local time was the unlabelled default state with nothing pressed.
+
+**Now:** Five buttons: **YOU, LDN, NYC, SPO, ODD**. YOU maps to the visitor's own zone and is pressed by default. Clicking an active city still returns to local, which now reads as YOU lighting up. Clicking YOU while it is active does nothing.
+
+Selection is tracked by button key (`'local'`, a zone id, or `'ODD'`) rather than by resolved zone. First cut compared resolved zones and lit both YOU and NYC for a visitor in New York — which is Pablo. Fixed before deploy.
+
+Decision 0003's button set was four; YOU is a Pablo addition. Position (first) is CC's choice.
+
+**Why:** Pablo, 2026-09-09: *"can you add a new button called YOU that has the users local time."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** remove the YOU `<li>`; the key-based selection logic can stay.
