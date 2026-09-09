@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oddments</title>
+<meta name="description" content="Oddments — ●◗◗">
+<style>
+  :root {
+    --paper: #ffffff;
+    --ink: #111111;
+    --muted: #9a9a9a;
+    --rule: #e2e2e2;
+    --accent: #E24B4A;
+  }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  .clock {
+    width: min(72vmin, 520px);
+    height: auto;
+    display: block;
+  }
+  .clock .numeral {
+    font-family: inherit;
+    font-size: 10px;
+    fill: var(--muted);
+    text-anchor: middle;
+  }
+  .clock .hub, .clock .hand { fill: var(--ink); }
+  .clock .seconds {
+    stroke: var(--accent);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    fill: none;
+  }
+  .controls {
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .controls button {
+    font: inherit;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .controls button:hover { color: var(--ink); border-color: var(--ink); }
+  .controls button[aria-pressed="true"] {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .controls button:focus-visible {
+    outline: 1px solid var(--ink);
+    outline-offset: 2px;
+  }
+  .caption {
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    min-height: 1.2em;
+  }
+</style>
+</head>
+<body>
+
+<svg class="clock" viewBox="0 0 180 180" role="img" aria-labelledby="clock-title" aria-describedby="clock-desc">
+  <title id="clock-title">Oddments</title>
+  <desc id="clock-desc">The Oddments mark as a working clock.</desc>
+
+  <g class="numerals" aria-hidden="true">
+    <text class="numeral" x="121"    y="39.81">1</text>
+    <text class="numeral" x="143.69" y="62.5">2</text>
+    <text class="numeral" x="152"    y="93.5">3</text>
+    <text class="numeral" x="143.69" y="124.5">4</text>
+    <text class="numeral" x="121"    y="147.19">5</text>
+    <text class="numeral" x="90"     y="155.5">6</text>
+    <text class="numeral" x="59"     y="147.19">7</text>
+    <text class="numeral" x="36.31"  y="124.5">8</text>
+    <text class="numeral" x="28"     y="93.5">9</text>
+    <text class="numeral" x="36.31"  y="62.5">10</text>
+    <text class="numeral" x="59"     y="39.81">11</text>
+    <text class="numeral" x="90"     y="31.5">12</text>
+  </g>
+
+  <circle class="hub" cx="90" cy="90" r="16"/>
+  <path id="hour"   class="hand" d="M108 74 A16 16 0 0 1 108 106 Z" transform="rotate(0 90 90)"/>
+  <path id="minute" class="hand" d="M126 74 A16 16 0 0 1 126 106 Z" transform="rotate(0 90 90)"/>
+  <line id="seconds" class="seconds" x1="90" y1="70" x2="90" y2="32" transform="rotate(0 90 90)"/>
+</svg>
+
+<ul class="controls" aria-label="Time zone">
+  <li><button type="button" data-zone="Europe/London"     aria-pressed="false">LDN</button></li>
+  <li><button type="button" data-zone="America/New_York"  aria-pressed="false">NYC</button></li>
+  <li><button type="button" data-zone="America/Sao_Paulo" aria-pressed="false">SPO</button></li>
+  <li><button type="button" data-zone="ODD"               aria-pressed="false">ODD</button></li>
+</ul>
+
+<p class="caption" id="caption" aria-live="off"></p>
+
+<script>
+(function () {
+  'use strict';
+
+  // --- Elements -------------------------------------------------------------
+  var hourEl    = document.getElementById('hour');
+  var minuteEl  = document.getElementById('minute');
+  var secondsEl = document.getElementById('seconds');
+  var captionEl = document.getElementById('caption');
+  var buttons   = Array.prototype.slice.call(document.querySelectorAll('.controls button'));
+
+  // --- Constants (decision 0003) --------------------------------------------
+  var LOCAL_ZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  var LABELS = { 'Europe/London': 'LDN', 'America/New_York': 'NYC', 'America/Sao_Paulo': 'SPO', 'ODD': 'ODD' };
+  var TWEEN_MS = 1100;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // --- Time reading ---------------------------------------------------------
+  var formatters = {};
+  function formatterFor(zone) {
+    if (!formatters[zone]) {
+      formatters[zone] = new Intl.DateTimeFormat('en-GB', {
+        timeZone: zone, hourCycle: 'h23',
+        hour: 'numeric', minute: 'numeric', second: 'numeric'
+      });
+    }
+    return formatters[zone];
+  }
+
+  // Returns { h, m, s } with s fractional (milliseconds included).
+  function readTime(zone, now) {
+    if (zone === 'ODD') return { h: 3, m: 15, s: 0 };
+    var parts = formatterFor(zone).formatToParts(new Date(now));
+    var t = { h: 0, m: 0, s: 0 };
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      if (p.type === 'hour')   t.h = parseInt(p.value, 10);
+      if (p.type === 'minute') t.m = parseInt(p.value, 10);
+      if (p.type === 'second') t.s = parseInt(p.value, 10);
+    }
+    t.s += (now % 1000) / 1000;
+    return t;
+  }
+
+  // --- Angles (decision 0003) -----------------------------------------------
+  function anglesFor(zone, now) {
+    var t = readTime(zone, now);
+    if (zone === 'ODD') {
+      // Snapped: hour hand at exactly 0 so the mark lands horizontal.
+      return { h: 0, m: (t.m + t.s / 60) * 6 - 90, s: t.s * 6 };
+    }
+    return {
+      h: ((t.h % 12) + t.m / 60) * 30 - 90,
+      m: (t.m + t.s / 60) * 6 - 90,
+      s: t.s * 6
+    };
+  }
+
+  // Always-clockwise forward delta, 0 <= d < 360.
+  function forward(target, current) {
+    return ((target - current) % 360 + 360) % 360;
+  }
+
+  function easeInOutCubic(x) {
+    return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+  }
+
+  // --- State ----------------------------------------------------------------
+  var zone = LOCAL_ZONE;                 // active zone; LOCAL_ZONE when nothing pressed
+  var cur = { h: 0, m: 0, s: 0 };        // displayed angles, unwrapped, monotonically increasing
+  var tween = null;                      // { start:{h,m,s}, delta:{h,m,s}, t0 }
+  var lastCaptionSecond = -1;
+
+  (function init() {
+    var a = anglesFor(zone, Date.now());
+    cur = { h: a.h, m: a.m, s: a.s };
+  })();
+
+  function render() {
+    hourEl.setAttribute('transform',    'rotate(' + cur.h + ' 90 90)');
+    minuteEl.setAttribute('transform',  'rotate(' + cur.m + ' 90 90)');
+    secondsEl.setAttribute('transform', 'rotate(' + cur.s + ' 90 90)');
+  }
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  function updateCaption(now) {
+    var t = readTime(zone, now);
+    var whole = Math.floor(t.s);
+    if (whole === lastCaptionSecond) return;
+    lastCaptionSecond = whole;
+    var label = zone === LOCAL_ZONE ? 'LOCAL' : LABELS[zone];
+    captionEl.textContent = label + '  ' + pad(t.h) + ':' + pad(t.m) + ':' + pad(whole);
+  }
+
+  // Advance the displayed angles to the live target, always moving forward.
+  function stepLive(now) {
+    var a = anglesFor(zone, now);
+    cur.h += forward(a.h, cur.h);
+    cur.m += forward(a.m, cur.m);
+    cur.s += forward(a.s, cur.s);
+  }
+
+  function frame(now) {
+    if (tween) {
+      var p = Math.min(1, (now - tween.t0) / TWEEN_MS);
+      var e = easeInOutCubic(p);
+      cur.h = tween.start.h + tween.delta.h * e;
+      cur.m = tween.start.m + tween.delta.m * e;
+      cur.s = tween.start.s + tween.delta.s * e;
+      if (p >= 1) tween = null;          // live updates resume next frame
+    } else {
+      stepLive(Date.now());
+    }
+    render();
+    updateCaption(Date.now());
+    window.requestAnimationFrame(frame);
+  }
+
+  // --- Zone switching -------------------------------------------------------
+  function setZone(next) {
+    zone = next;
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.zone === zone ? 'true' : 'false');
+    });
+    lastCaptionSecond = -1;
+
+    var a = anglesFor(zone, Date.now());
+    var delta = {
+      h: forward(a.h, cur.h),
+      m: forward(a.m, cur.m),
+      s: forward(a.s, cur.s)
+    };
+
+    if (reduceMotion.matches) {
+      cur.h += delta.h; cur.m += delta.m; cur.s += delta.s;
+      tween = null;
+      return;
+    }
+    tween = { start: { h: cur.h, m: cur.m, s: cur.s }, delta: delta, t0: performance.now() };
+  }
+
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var target = b.dataset.zone;
+      setZone(target === zone ? LOCAL_ZONE : target);
+    });
+  });
+
+  render();
+  window.requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
