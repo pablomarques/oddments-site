@@ -79,4 +79,6 @@ Then a run of button refinements: pinned to the bottom, solid quiet fills with n
 
 Later still: the dot became the sole active signal, and Pablo added an auto-cycle — the page now walks through the five buttons every 5s with a subtle countdown fill in the active button, until the visitor clicks. This changes the page's default behaviour from "local time, static" to "touring the zones"; it is Pablo's call and is not in decision 0003.
 
-Open from CC's side: exact colour values are estimated from the screenshot; the seconds-hand hold during a city wind is still as decision 0003 specifies; the countdown fill is very subtle at the current greys.
+Pablo then noticed the seconds-hand hold during a wind (the consequence CC flagged at build) and asked for it to keep moving. Done: live time now runs through the wind. Third locked-decision item changed by Pablo directly (0003, "live updates pause during the tween"); all three flagged in the CC log for SC.
+
+Open from CC's side: exact colour values are estimated from the screenshot; the countdown fill grey is a single token.

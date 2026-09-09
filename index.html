@@ -221,7 +221,7 @@
   var selected = 'local';                // which button is pressed: 'local', a zone id, or 'ODD'
   var zone = LOCAL_ZONE;                 // the zone that selection resolves to
   var cur = { h: 0, m: 0, s: 0 };        // displayed angles, unwrapped, monotonically increasing
-  var tween = null;                      // { start:{h,m,s}, delta:{h,m,s}, t0 }
+  var tween = null;                      // { start:{h,m,s}, delta:{h,m,s}, base:{h,m,s}, t0 }
   var cycling = true;                    // auto-cycle until the visitor clicks a button
   var cycleT0 = performance.now();       // when the current button became active
 
@@ -273,12 +273,16 @@
   function frame(now) {
     if (cycling) stepCycle(now);
     if (tween) {
+      // Wind the captured delta, and add however far live time has moved since the
+      // wind began, so the seconds hand keeps sweeping and the hands land exactly
+      // on the live target with no catch-up jump.
       var p = Math.min(1, (now - tween.t0) / TWEEN_MS);
       var e = easeInOutCubic(p);
-      cur.h = tween.start.h + tween.delta.h * e;
-      cur.m = tween.start.m + tween.delta.m * e;
-      cur.s = tween.start.s + tween.delta.s * e;
-      if (p >= 1) tween = null;          // live updates resume next frame
+      var live = anglesFor(zone, Date.now());
+      cur.h = tween.start.h + tween.delta.h * e + forward(live.h, tween.base.h);
+      cur.m = tween.start.m + tween.delta.m * e + forward(live.m, tween.base.m);
+      cur.s = tween.start.s + tween.delta.s * e + forward(live.s, tween.base.s);
+      if (p >= 1) tween = null;
     } else {
       stepLive(Date.now());
     }
@@ -312,7 +316,7 @@
       tween = null;
       return;
     }
-    tween = { start: { h: cur.h, m: cur.m, s: cur.s }, delta: delta, t0: performance.now() };
+    tween = { start: { h: cur.h, m: cur.m, s: cur.s }, delta: delta, base: a, t0: performance.now() };
   }
 
   buttons.forEach(function (b) {

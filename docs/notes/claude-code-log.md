@@ -235,3 +235,19 @@ Decision 0003 has no auto-cycle; this is a Pablo addition.
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** point the `::before` background back at `--button-hover` and drop the token.
+
+## 2026-09-09 — Iteration 13: seconds hand keeps sweeping through a zone wind
+
+**Was:** Per decision 0003 as written, live updates paused during the 1100ms wind. The seconds hand held still for 1.1s and then caught up with a ~6.6° forward jump. Flagged at build (see the first log entry) and reported to Pablo.
+
+**Now:** The wind still carries the captured clockwise delta over 1100ms with the same easing, but each frame also adds how far live time has moved since the wind began (`forward(live, base)` per hand). The seconds hand therefore sweeps normally throughout and all hands land exactly on the live target with no catch-up. ODD is unaffected (its target does not move).
+
+**Verified [VERIFIED: Node harness with stubbed DOM and fake clock, 50ms frames]:** seconds hand advances 0.300° every frame during and after the wind; hour hand eases 0→150° monotonically. The browser pane throttles timers when unfocused, so the live-browser check was inconclusive and the harness stands as the evidence. Harness is in CC's scratchpad, not the project.
+
+**⚠ Touches a locked decision.** Decision 0003: "Live updates pause during the tween and resume after." Superseded by Pablo's instruction; SC to amend alongside the earlier 0002/0003 changes.
+
+**Why:** Pablo, 2026-09-09: *"when the timezone changes the seconds pointer is doing a little stuttering, it should continue to move normally."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** in `frame()`, drop the three `forward(live.*, tween.base.*)` terms and the `live` read; `base` on the tween object becomes unused.
