@@ -131,3 +131,15 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** restore from commit `e200038` (last version with the caption).
+
+## 2026-09-09 — Iteration 5: buttons smaller, solid fill, no outline
+
+**Was:** 11px uppercase pills with a 1px `#2E2E2E` outline, transparent fill, accent outline when active.
+
+**Now:** 10px, padding 5px 10px, gap 6px, no border. Solid fill `#1C1C1C` (ground is `#161616`); hover and active fill `#222222`. Active text stays accent red; hover text goes to ink. `--rule` token removed, `--button` and `--button-hover` added.
+
+**Why:** Pablo, 2026-09-09: *"make the buttons a little smaller and more delicate maybe with solid backgrounds with a very subtle change of color from the bg color and without outlines."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** restore the `.controls button` block and `--rule` token from commit `a493df2`.

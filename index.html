@@ -10,7 +10,8 @@
     --paper: #161616;
     --ink: #ECEAE5;
     --muted: #8C8C8C;
-    --rule: #2E2E2E;
+    --button: #1C1C1C;
+    --button-hover: #222222;
     --accent: #E24B4A;
   }
   html, body { height: 100%; margin: 0; }
@@ -50,28 +51,28 @@
     bottom: calc(32px + env(safe-area-inset-bottom, 0px));
     display: flex;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     margin: 0;
     padding: 0;
     list-style: none;
   }
   .controls button {
     font: inherit;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
-    background: transparent;
-    border: 1px solid var(--rule);
+    background: var(--button);
+    border: 0;
     border-radius: 999px;
-    padding: 5px 12px;
+    padding: 5px 10px;
     cursor: pointer;
-    transition: color 150ms ease, border-color 150ms ease;
+    transition: color 150ms ease, background-color 150ms ease;
   }
-  .controls button:hover { color: var(--ink); border-color: var(--ink); }
+  .controls button:hover { color: var(--ink); background: var(--button-hover); }
   .controls button[aria-pressed="true"] {
     color: var(--accent);
-    border-color: var(--accent);
+    background: var(--button-hover);
   }
   .controls button:focus-visible {
     outline: 1px solid var(--ink);
