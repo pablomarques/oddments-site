@@ -390,3 +390,15 @@ Built as a comparison tool for Pablo. Whether it ships, or whether the site foll
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** restore the links, `.wordmark` rules and `<p class="wordmark">` from `b0d2d6c`.
+
+## 2026-09-09 — oddments.studio attached, redirecting to oddments.design
+
+**Was:** `oddments.studio` registered on Vercel, unattached.
+
+**Now:** `oddments.studio` and `www.oddments.studio` attached to project `oddments`, both set to 308 → `https://oddments.design/` via the Vercel API (same call as the `www.oddments.design` redirect). HTTP on `.studio` upgrades to HTTPS first, then redirects [VERIFIED: curl on all three forms]. TLS issued for both. Both Oddments domains are now live; `.design` is canonical, `.studio` is a redirect.
+
+**Why:** Pablo, 2026-09-09: *"can you point oddments.studio there too."* Redirect rather than serve-directly is CC's reading of Pablo's 2026-09-08 "the official one is .design"; one API call flips it to serving the page directly if wanted.
+
+**Affects:** Public web.
+
+**If reverting:** `vercel domains rm oddments.studio` and `vercel domains rm www.oddments.studio`.
