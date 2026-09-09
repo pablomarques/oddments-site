@@ -344,3 +344,15 @@ Built as a comparison tool for Pablo. Whether it ships, or whether the site foll
 **Why:** Pablo, 2026-09-09: *"can you push live so i can see on my mobile?"*
 
 **If reverting:** `vercel rollback`.
+
+## 2026-09-09 — Iteration 18: wordmark top-left
+
+**Was:** No wordmark on the page.
+
+**Now:** `<p class="wordmark">●◗◗ments</p>` fixed top-left at the 32px margins (mirrors the AM/PM capsule top-right). Inter Medium 12px, ink colour, loaded from Google Fonts (weight 500 only, `display=swap`, with preconnects). This is the page's first external request. Inter has no ◗ glyph, so the two half-discs render in the system fallback; ● and "ments" are Inter. Verified Inter loads [VERIFIED: `document.fonts.check`].
+
+**Why:** Pablo, 2026-09-09: *"can you add this, in inter, medium 12px to the top left? ●◗◗ments"*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** remove the three `<link>` tags, the `.wordmark` rule and the `<p class="wordmark">`.

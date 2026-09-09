@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Oddments</title>
 <meta name="description" content="Oddments — ●◗◗">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap">
 <style>
   :root {
     --paper: #161616;
@@ -95,6 +98,19 @@
     pointer-events: none;
   }
   .controls:not(.cycling) button::before { display: none; }
+  /* Wordmark, top-left. Inter Medium 12px; the ◗ glyphs fall back to the system font. */
+  .wordmark {
+    position: fixed;
+    top: calc(32px + env(safe-area-inset-top, 0px));
+    left: 32px;
+    margin: 0;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1;
+    color: var(--ink);
+    user-select: none;
+  }
   /* AM/PM switch: a vertical capsule, AM above PM, a pill slides behind the selected one. */
   .theme {
     position: fixed;
@@ -175,6 +191,8 @@
 </style>
 </head>
 <body>
+
+<p class="wordmark" aria-label="Oddments">●◗◗ments</p>
 
 <div class="theme" id="theme" role="group" aria-label="Light or dark mode">
   <span class="theme-pill" aria-hidden="true"></span>
