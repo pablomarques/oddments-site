@@ -59,3 +59,17 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** Vercel account state only. This project's deploy path is now: `vercel deploy` → Preview (login-gated); `vercel deploy --prod` → Production (public at the alias above).
 
 **If reverting:** `vercel remove <deployment-url> --yes`. The alias goes 404 once no production deployment exists.
+
+## 2026-09-09 — GitHub remote added
+
+**Was:** Local-only git repo.
+
+**Now:** Private repo `github.com/pablomarques/oddments-site`, remote `origin`, `main` pushed and tracking. Naming follows Pablo's existing repos (lowercase kebab, no project number, private).
+
+**Why:** Pablo, 2026-09-09: *"github is important for us to keep our stuff versioned and safe and portable."*
+
+**Not done, deliberately:** the Vercel project is not connected to the GitHub repo. A git integration would auto-deploy every push to `main` as Production, which would bypass the publish gate in decision 0004. Deploys stay CLI-driven: `vercel deploy` for previews, `vercel deploy --prod` only on Pablo's yes.
+
+**Affects:** Pablo's GitHub account (one new private repo). Nothing outside this project.
+
+**If reverting:** `git remote remove origin`; delete the repo on GitHub.
