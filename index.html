@@ -71,8 +71,32 @@
   }
   .controls button:hover { color: var(--ink); background: var(--button-hover); }
   .controls button[aria-pressed="true"] {
-    color: var(--accent);
+    color: var(--ink);
     background: var(--button-hover);
+  }
+  /* Selected-state marker: a terminal-style dot that slides open before the label. */
+  .controls .dot {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    width: 0;
+    height: 5px;
+    margin-right: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0;
+    transition: width 260ms cubic-bezier(0.65, 0, 0.35, 1),
+                margin-right 260ms cubic-bezier(0.65, 0, 0.35, 1),
+                opacity 200ms ease;
+  }
+  .controls button[aria-pressed="true"] .dot {
+    width: 5px;
+    margin-right: 6px;
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .controls .dot { transition: none; }
   }
   .controls button:focus-visible {
     outline: 1px solid var(--ink);
@@ -108,10 +132,10 @@
 </svg>
 
 <ul class="controls" aria-label="Time zone">
-  <li><button type="button" data-zone="Europe/London"     aria-pressed="false">LDN</button></li>
-  <li><button type="button" data-zone="America/New_York"  aria-pressed="false">NYC</button></li>
-  <li><button type="button" data-zone="America/Sao_Paulo" aria-pressed="false">SPO</button></li>
-  <li><button type="button" data-zone="ODD"               aria-pressed="false">ODD</button></li>
+  <li><button type="button" data-zone="Europe/London"     aria-pressed="false"><span class="dot" aria-hidden="true"></span>LDN</button></li>
+  <li><button type="button" data-zone="America/New_York"  aria-pressed="false"><span class="dot" aria-hidden="true"></span>NYC</button></li>
+  <li><button type="button" data-zone="America/Sao_Paulo" aria-pressed="false"><span class="dot" aria-hidden="true"></span>SPO</button></li>
+  <li><button type="button" data-zone="ODD"               aria-pressed="false"><span class="dot" aria-hidden="true"></span>ODD</button></li>
 </ul>
 
 <script>

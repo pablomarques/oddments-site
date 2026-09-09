@@ -143,3 +143,15 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** restore the `.controls button` block and `--rule` token from commit `a493df2`.
+
+## 2026-09-09 — Iteration 6: selected button marked by an animated red dot instead of red text
+
+**Was:** Selected button showed its label in accent red.
+
+**Now:** Each button contains an empty `<span class="dot" aria-hidden="true">` before the label. Selected state: text in ink colour, and the dot animates from `width: 0; margin-right: 0; opacity: 0` to `5px / 6px / 1` over 260ms (ease-in-out curve), so the pill grows smoothly to fit. Deselecting reverses it. `prefers-reduced-motion` disables the transition. Decision 0003's "accent border and accent text" for the active button is now superseded by this marker on Pablo's instruction (border already gone in Iteration 5).
+
+**Why:** Pablo, 2026-09-09: *"instead of turning the whole three letters red … use the terminal style circle glyph in front of the name of the selected one. the button should grow to accommodate it and that growth should be animated smoothly."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** remove the four `<span class="dot">` elements and the `.dot` rules; set `[aria-pressed="true"]` colour back to `var(--accent)`.
