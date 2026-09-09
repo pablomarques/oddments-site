@@ -183,3 +183,15 @@ Decision 0003's button set was four; YOU is a Pablo addition. Position (first) i
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** remove the YOU `<li>`; the key-based selection logic can stay.
+
+## 2026-09-09 — Iteration 9: selection dot vertically centred
+
+**Was:** Dot was an inline-block with `vertical-align: middle` and a -1px nudge, which sat it on the text baseline's middle rather than the button's.
+
+**Now:** Buttons are `inline-flex; align-items: center; line-height: 1`; the dot is a flex item. Measured: dot centre and button centre coincide to the pixel.
+
+**Why:** Pablo, 2026-09-09: *"the circle in the buttons should be vertically centralized too."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** restore the inline-block dot rules from commit `b42ff0a`.

@@ -57,8 +57,11 @@
     list-style: none;
   }
   .controls button {
+    display: inline-flex;
+    align-items: center;
     font: inherit;
     font-size: 10px;
+    line-height: 1;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--muted);
@@ -76,10 +79,8 @@
   }
   /* Selected-state marker: a terminal-style dot that slides open before the label. */
   .controls .dot {
-    display: inline-block;
-    vertical-align: middle;
-    position: relative;
-    top: -1px;
+    display: block;
+    flex: none;
     width: 0;
     height: 5px;
     margin-right: 0;
