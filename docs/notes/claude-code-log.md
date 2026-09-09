@@ -476,3 +476,15 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** `--paper` back to `#161616`.
+
+## 2026-09-09 — Iteration 26: night ground another 10% darker
+
+**Was:** `--paper: #141414`.
+
+**Now:** `--paper: #121212` (value 18). Two steps down from the original `#161616` in total. Buttons unchanged.
+
+**Why:** Pablo, 2026-09-09: *"another 10% darker."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** `--paper` back to `#141414`.
