@@ -155,3 +155,15 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** remove the four `<span class="dot">` elements and the `.dot` rules; set `[aria-pressed="true"]` colour back to `var(--accent)`.
+
+## 2026-09-09 — Iteration 7: equal spacing around the dot
+
+**Was:** Button side padding 10px, dot-to-label gap 6px.
+
+**Now:** Both 8px. Edge→dot, dot→label, and label→edge are the same measure.
+
+**Why:** Pablo, 2026-09-09: *"the margin between the button edges and the dot and the dot and three letter words should be the same."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** padding back to `5px 10px`, dot `margin-right` back to 6px.
