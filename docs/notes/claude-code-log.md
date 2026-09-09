@@ -251,3 +251,15 @@ Decision 0003 has no auto-cycle; this is a Pablo addition.
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** in `frame()`, drop the three `forward(live.*, tween.base.*)` terms and the `live` read; `base` on the tween object becomes unused.
+
+## 2026-09-09 — Promoted to production (vercel.app alias)
+
+**Was:** Production alias `oddments-pi.vercel.app` served the original white build from 2026-09-09 morning.
+
+**Now:** Production is deployment `oddments-fwjjbfpm3-pabs-studio.vercel.app`, i.e. the current `index.html` at commit `4cb2083` (iterations 1–13). Served HTML is byte-identical to the file [VERIFIED: `curl | diff`].
+
+**Why:** Pablo, 2026-09-09: *"promote."* Explicit yes for the vercel.app alias. Custom domains `oddments.design` / `oddments.studio` remain unattached and still gated on a separate yes.
+
+**Affects:** Vercel production state only.
+
+**If reverting:** `vercel rollback` to the previous production deployment, or `vercel promote <previous-url>`.
