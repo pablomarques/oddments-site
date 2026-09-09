@@ -324,3 +324,15 @@ Built as a comparison tool for Pablo. Whether it ships, or whether the site foll
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** two string changes in the toggle markup and `applyTheme`.
+
+## 2026-09-09 — Iteration 17: AM/PM switch as a vertical capsule with a sliding pill
+
+**Was:** Single pill toggle reading AM or PM.
+
+**Now:** A vertical capsule (`.theme`, fixed top-right at the 32px margins, `--button` fill, 14px radius, 3px inner padding) holding two buttons, AM above PM. A `.theme-pill` (`--progress` fill, 11px radius) sits behind the selected one and slides between them over 260ms with the same easing as the selection dot; reduced-motion disables the slide. AM = light palette, PM = dark. Selected label goes to ink. Both buttons carry `aria-pressed`; the group has an `aria-label`. Persistence and default (PM) unchanged. Mobile breakpoint bumps the capsule's type to 12px like the zone buttons.
+
+**Why:** Pablo, 2026-09-09: *"make it work like an am pm clock complication … two modes inside a vertical squircle AM on top PM on the bottom and a little pill that gets behind the one you click."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** restore the single-toggle markup, CSS and script from commit `fc796cb`.

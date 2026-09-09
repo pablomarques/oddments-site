@@ -66,7 +66,7 @@
     padding: 0;
     list-style: none;
   }
-  .controls button, .theme button {
+  .controls button {
     position: relative;
     overflow: hidden;
     display: inline-flex;
@@ -84,7 +84,7 @@
     cursor: pointer;
     transition: color 150ms ease, background-color 150ms ease;
   }
-  .controls button:hover, .theme button:hover { color: var(--ink); background: var(--button-hover); }
+  .controls button:hover { color: var(--ink); background: var(--button-hover); }
   /* While auto-cycling, the active button's fill sweeps left→right as a countdown. */
   .controls button::before {
     content: "";
@@ -95,16 +95,47 @@
     pointer-events: none;
   }
   .controls:not(.cycling) button::before { display: none; }
-  /* Day/night toggle: same pill, top-right, no progress fill. */
+  /* AM/PM switch: a vertical capsule, AM above PM, a pill slides behind the selected one. */
   .theme {
     position: fixed;
     top: calc(32px + env(safe-area-inset-top, 0px));
     right: 32px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    background: var(--button);
+    border-radius: 14px;
   }
-  .theme button::before { display: none; }
+  .theme-pill {
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    top: 3px;
+    height: calc(50% - 3px);
+    border-radius: 11px;
+    background: var(--progress);
+    transform: translateY(100%);
+    transition: transform 260ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .theme.day .theme-pill { transform: translateY(0); }
+  .theme button {
+    position: relative;
+    font: inherit;
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: 0;
+    border-radius: 11px;
+    padding: 6px 8px;
+    cursor: pointer;
+    transition: color 150ms ease;
+  }
+  .theme button:hover, .theme button[aria-pressed="true"] { color: var(--ink); }
+  .theme button:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .theme-pill { transition: none; } }
   .controls button > * { position: relative; }
   /* Selected-state marker: a terminal-style dot that slides open before the label. */
   .controls .dot {
@@ -132,11 +163,12 @@
   @media (max-width: 600px) {
     .clock { width: 252px; }
     .controls { gap: 8px; }
-    .controls button, .theme button { font-size: 12px; padding: 7px 10px; }
+    .controls button { font-size: 12px; padding: 7px 10px; }
+    .theme button { font-size: 12px; padding: 7px 10px; }
     .controls .dot { height: 6px; }
     .controls button[aria-pressed="true"] .dot { width: 6px; margin-right: 10px; }
   }
-  .controls button:focus-visible, .theme button:focus-visible {
+  .controls button:focus-visible {
     outline: 1px solid var(--ink);
     outline-offset: 2px;
   }
@@ -144,9 +176,11 @@
 </head>
 <body>
 
-<ul class="theme">
-  <li><button type="button" id="theme-toggle" aria-pressed="false" aria-label="Switch between PM (dark) and AM (light) mode"><span>PM</span></button></li>
-</ul>
+<div class="theme" id="theme" role="group" aria-label="Light or dark mode">
+  <span class="theme-pill" aria-hidden="true"></span>
+  <button type="button" data-theme="day"   aria-pressed="false">AM</button>
+  <button type="button" data-theme="night" aria-pressed="true">PM</button>
+</div>
 
 <svg class="clock" viewBox="0 0 180 180" role="img" aria-labelledby="clock-title" aria-describedby="clock-desc">
   <title id="clock-title">Oddments</title>
@@ -191,7 +225,8 @@
   var secondsEl = document.getElementById('seconds');
   var buttons   = Array.prototype.slice.call(document.querySelectorAll('.controls button'));
   var controlsEl = document.getElementById('controls');
-  var themeBtn  = document.getElementById('theme-toggle');
+  var themeEl   = document.getElementById('theme');
+  var themeBtns = Array.prototype.slice.call(themeEl.querySelectorAll('button'));
 
   // --- Constants (decision 0003) --------------------------------------------
   var LOCAL_ZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -359,19 +394,22 @@
     });
   });
 
-  // --- Day / night ----------------------------------------------------------
+  // --- AM / PM (light / dark) -----------------------------------------------
   function applyTheme(theme) {
-    if (theme === 'day') document.documentElement.setAttribute('data-theme', 'day');
+    var day = theme === 'day';
+    if (day) document.documentElement.setAttribute('data-theme', 'day');
     else document.documentElement.removeAttribute('data-theme');
-    themeBtn.querySelector('span').textContent = theme === 'day' ? 'AM' : 'PM';
-    themeBtn.setAttribute('aria-pressed', theme === 'day' ? 'true' : 'false');
+    themeEl.classList.toggle('day', day);
+    themeBtns.forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.theme === theme ? 'true' : 'false');
+    });
     try { localStorage.setItem('oddments-theme', theme); } catch (e) {}
   }
   var savedTheme = null;
   try { savedTheme = localStorage.getItem('oddments-theme'); } catch (e) {}
   applyTheme(savedTheme === 'day' ? 'day' : 'night');
-  themeBtn.addEventListener('click', function () {
-    applyTheme(document.documentElement.getAttribute('data-theme') === 'day' ? 'night' : 'day');
+  themeBtns.forEach(function (b) {
+    b.addEventListener('click', function () { applyTheme(b.dataset.theme); });
   });
 
   markPressed();
