@@ -356,3 +356,17 @@ Built as a comparison tool for Pablo. Whether it ships, or whether the site foll
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** remove the three `<link>` tags, the `.wordmark` rule and the `<p class="wordmark">`.
+
+## 2026-09-09 — Iteration 19: wordmark glyphs set in Noto Sans Symbols 2
+
+**Was:** ●◗◗ in Inter, with ◗ falling back to the system font. The circle rendered visibly larger than the half-discs and the mark differed between the site and Figma because each picked a different fallback.
+
+**Now:** The three glyphs are wrapped in `<span class="mark">` set in Noto Sans Symbols 2, loaded from Google Fonts subset to just ● and ◗ (`text=` parameter, `display=block`), with Apple Symbols → DejaVu Sans as fallbacks. Scaled to 72% so the shapes sit on Inter's x-height and the wordmark reads as one lowercase word. "ments" unchanged (Inter Medium 12px).
+
+**Research behind the choice [VERIFIED: cmap inspection with fontTools on downloaded files]:** fonts carrying both U+25CF and U+25D7 with matched proportions are Noto Sans Symbols 2, Noto Sans Math, DejaVu Sans, and on macOS Apple Symbols, Menlo, Arial Unicode. Inter, Roboto, Source Sans 3, JetBrains Mono have ● only; Fira Sans and IBM Plex Sans have neither. Pablo chose Noto Sans Symbols 2 from a rendered side-by-side; row 1 (100%) or row 8 (72%) were both acceptable to him; CC took 72%.
+
+**Why:** Pablo, 2026-09-09: *"notosans is so good for it either 1 or 8 are great."*
+
+**Affects:** `index.html` only. Second external font request (a few hundred bytes). Preview deployed; production untouched.
+
+**If reverting:** drop the second `<link>`, the `.wordmark .mark` rule and the span.

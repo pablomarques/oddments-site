@@ -85,4 +85,6 @@ End of session: Pablo promoted the current build to production and then to `oddm
 
 Then two more: a mobile breakpoint (promoted to production so Pablo could check it on his phone), and a day/night toggle in the top-right so Pablo can compare palettes. The toggle is a comparison tool; whether it stays is undecided.
 
-Open from CC's side: exact colour values are estimated from the screenshot; the countdown fill grey is a single token; `oddments.studio` redirect not yet set up; fate of the day/night toggle.
+The AM/PM toggle became a vertical capsule with a sliding pill (Pablo's design, "like a clock complication"), promoted to production. Then a wordmark: `●◗◗ments` top-left in Inter Medium 12px. That surfaced a real finding for `understanding.md`: the typed mark is portable as a string but not as a rendering, because no common text font carries both ● and ◗ — Inter has the circle only, so the half-discs fall back to whatever symbol font the OS or app has, and the proportions drift. CC inspected font tables and rendered the candidates side by side; Pablo chose Noto Sans Symbols 2, which draws both glyphs to matching proportions and is on Google Fonts. Worth carrying into the products' own wordmarks.
+
+Open from CC's side: exact colour values are estimated from the screenshot; the countdown fill grey is a single token; `oddments.studio` redirect not yet set up; fate of the AM/PM toggle on the public page.
