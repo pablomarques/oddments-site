@@ -402,3 +402,19 @@ Built as a comparison tool for Pablo. Whether it ships, or whether the site foll
 **Affects:** Public web.
 
 **If reverting:** `vercel domains rm oddments.studio` and `vercel domains rm www.oddments.studio`.
+
+## 2026-09-09 — Iteration 21: favicon
+
+**Was:** No favicon (browsers requested `/favicon.ico` and got 404).
+
+**Now:** Two inline data-URI icons, no extra files, no external requests:
+- `rel="icon"`: SVG of the linear mark per decision 0002 (hub 0–32, ◗ 34–50, ◗ 52–68, gap 2), centred in a 72-unit square. Fill `#161616`, switching to `#ECEAE5` under `prefers-color-scheme: dark`, so it reads on both light and dark tab bars. 363 characters.
+- `rel="apple-touch-icon"`: 180×180 PNG (4.7KB) of the same geometry, off-white on the `#161616` night ground, for iOS home-screen tiles, which need a bitmap and a solid ground. Drawn on a canvas in the browser from the same numbers; not a hand-made asset.
+
+Safari on macOS ignores SVG favicons and shows the touch icon instead. Open question 9 (favicon and title) is partly answered; the animated-in-the-tab idea from that question is not done.
+
+**Why:** Pablo, 2026-09-09: *"can you generate a little favicon with the logo?"*
+
+**Affects:** `index.html` only (now ~20KB, mostly the PNG). Preview deployed; production untouched.
+
+**If reverting:** delete the two `<link rel="icon"…>` / `<link rel="apple-touch-icon"…>` lines.
