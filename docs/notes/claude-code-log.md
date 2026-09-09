@@ -64,12 +64,12 @@ Per-change historical trail. One entry per significant implementation change: Wa
 
 **Was:** Local-only git repo.
 
-**Now:** Private repo `github.com/pablomarques/oddments-site`, remote `origin`, `main` pushed and tracking. Naming follows Pablo's existing repos (lowercase kebab, no project number, private).
+**Now:** Public repo `github.com/pablomarques/oddments-site`, remote `origin`, `main` pushed and tracking. Created private, then made public on Pablo's instruction the same day (*"it doesnt need to be private"*). Naming follows Pablo's existing repos (lowercase kebab, no project number). Commits are authored with Pablo's GitHub noreply address because his account blocks pushes that expose a private email; the first push was rejected for that reason and all commits were rewritten before any reached GitHub.
 
 **Why:** Pablo, 2026-09-09: *"github is important for us to keep our stuff versioned and safe and portable."*
 
 **Not done, deliberately:** the Vercel project is not connected to the GitHub repo. A git integration would auto-deploy every push to `main` as Production, which would bypass the publish gate in decision 0004. Deploys stay CLI-driven: `vercel deploy` for previews, `vercel deploy --prod` only on Pablo's yes.
 
-**Affects:** Pablo's GitHub account (one new private repo). Nothing outside this project.
+**Affects:** Pablo's GitHub account (one new public repo). Nothing outside this project.
 
 **If reverting:** `git remote remove origin`; delete the repo on GitHub.
