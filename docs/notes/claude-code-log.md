@@ -336,3 +336,11 @@ Built as a comparison tool for Pablo. Whether it ships, or whether the site foll
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** restore the single-toggle markup, CSS and script from commit `fc796cb`.
+
+## 2026-09-09 — Promoted iteration 17 to production
+
+**Now:** oddments.design serves commit `1776342` (AM/PM capsule). Deployment `oddments-1hx4wt6kq-pabs-studio.vercel.app`. Byte-identical to `index.html` [VERIFIED: `curl | diff`].
+
+**Why:** Pablo, 2026-09-09: *"can you push live so i can see on my mobile?"*
+
+**If reverting:** `vercel rollback`.
