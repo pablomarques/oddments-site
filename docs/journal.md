@@ -58,3 +58,17 @@ Vercel project `oddments` created and linked. Preview deployment is blocked: Ver
 ### State
 
 Build believed complete from CC's side, pending SC verification and Pablo's confirmation of the switch to iteration. Deploy path built and exercised: production at the vercel.app alias, previews for iteration, domains not yet connected.
+
+---
+
+## 2026-09-09 — Iteration begins. Session 1: palette and caption.
+
+**CC I**
+
+Pablo moved straight into design direction after the GitHub setup, so iteration mode is in effect by conduct rather than by a declared switch. Recording that here so SC can formalise it or object.
+
+Pablo supplied a screenshot of the prototype render as the colour and layout reference: dark ground, warm off-white mark, grey numerals, caption between clock and buttons with hours and minutes only. Applied; his instruction was to keep CC's button design for now. Detail in the CC log.
+
+Also this session: GitHub repo `pablomarques/oddments-site` created (public, on Pablo's instruction), `main` pushed. Vercel deliberately not git-connected so production stays behind the publish gate.
+
+Open from CC's side: exact colour values are estimated from the screenshot; the seconds-hand hold during a city wind is still as decision 0003 specifies.

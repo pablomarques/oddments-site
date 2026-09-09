@@ -7,10 +7,10 @@
 <meta name="description" content="Oddments — ●◗◗">
 <style>
   :root {
-    --paper: #ffffff;
-    --ink: #111111;
-    --muted: #9a9a9a;
-    --rule: #e2e2e2;
+    --paper: #161616;
+    --ink: #ECEAE5;
+    --muted: #8C8C8C;
+    --rule: #2E2E2E;
     --accent: #E24B4A;
   }
   html, body { height: 100%; margin: 0; }
@@ -22,7 +22,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+    gap: 0;
   }
   .clock {
     width: min(72vmin, 520px);
@@ -45,7 +45,7 @@
   .controls {
     display: flex;
     gap: 8px;
-    margin: 0;
+    margin: 40px 0 0;
     padding: 0;
     list-style: none;
   }
@@ -72,9 +72,9 @@
     outline-offset: 2px;
   }
   .caption {
-    margin: 0;
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    margin: 48px 0 0;
+    font-size: 17px;
+    letter-spacing: 0.02em;
     color: var(--muted);
     font-variant-numeric: tabular-nums;
     min-height: 1.2em;
@@ -108,14 +108,14 @@
   <line id="seconds" class="seconds" x1="90" y1="70" x2="90" y2="32" transform="rotate(0 90 90)"/>
 </svg>
 
+<p class="caption" id="caption" aria-live="off"></p>
+
 <ul class="controls" aria-label="Time zone">
   <li><button type="button" data-zone="Europe/London"     aria-pressed="false">LDN</button></li>
   <li><button type="button" data-zone="America/New_York"  aria-pressed="false">NYC</button></li>
   <li><button type="button" data-zone="America/Sao_Paulo" aria-pressed="false">SPO</button></li>
   <li><button type="button" data-zone="ODD"               aria-pressed="false">ODD</button></li>
 </ul>
-
-<p class="caption" id="caption" aria-live="off"></p>
 
 <script>
 (function () {
@@ -209,7 +209,7 @@
     if (whole === lastCaptionSecond) return;
     lastCaptionSecond = whole;
     var label = zone === LOCAL_ZONE ? 'LOCAL' : LABELS[zone];
-    captionEl.textContent = label + '  ' + pad(t.h) + ':' + pad(t.m) + ':' + pad(whole);
+    captionEl.textContent = label + ' ' + pad(t.h) + ':' + pad(t.m);
   }
 
   // Advance the displayed angles to the live target, always moving forward.

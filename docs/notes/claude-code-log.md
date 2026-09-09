@@ -73,3 +73,18 @@ Per-change historical trail. One entry per significant implementation change: Wa
 **Affects:** Pablo's GitHub account (one new public repo). Nothing outside this project.
 
 **If reverting:** `git remote remove origin`; delete the repo on GitHub.
+
+## 2026-09-09 — Iteration 1: dark palette and caption layout from Pablo's reference screenshot
+
+**Was:** CC defaults — white ground, near-black mark, caption below the buttons in 11px letter-spaced type showing HH:MM:SS.
+
+**Now:** Matches the screenshot Pablo supplied (his original prototype render):
+- Ground `#161616`, mark `#ECEAE5` (warm off-white), numerals and caption `#8C8C8C`, button rule `#2E2E2E`. Seconds red unchanged (locked).
+- Caption moved between clock and buttons, 17px, shows label + HH:MM (no seconds). Buttons keep CC's design, 40px below the caption.
+- Colour values are eyeballed from the screenshot, not sampled; Pablo can correct them.
+
+**Why:** Pablo, 2026-09-09: *"this is a screen shot of the colors to use and the design of the clock, the buttons you can keep the designs you made for now."* First iteration-mode change.
+
+**Affects:** `index.html` only. Deployed as a Vercel preview, production untouched.
+
+**If reverting:** restore the five CSS token values, move `<p class="caption">` back below `<ul class="controls">`, reinstate `:SS` in `updateCaption`.
