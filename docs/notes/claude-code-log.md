@@ -195,3 +195,15 @@ Decision 0003's button set was four; YOU is a Pablo addition. Position (first) i
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** restore the inline-block dot rules from commit `b42ff0a`.
+
+## 2026-09-09 — Iteration 10: the dot is the only active signal
+
+**Was:** Active button also switched text to ink and fill to the hover shade.
+
+**Now:** Active button is identical to an inactive one apart from the red dot. Hover treatment unchanged (it is a hover, not an active signal). `aria-pressed` still carries the state for assistive tech.
+
+**Why:** Pablo, 2026-09-09: *"dont change anything else in the button to say it is the active button, the dot alone suffices."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** re-add the `[aria-pressed="true"]` colour/background rule from commit `e3f6689`.
