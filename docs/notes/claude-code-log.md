@@ -370,3 +370,11 @@ Built as a comparison tool for Pablo. Whether it ships, or whether the site foll
 **Affects:** `index.html` only. Second external font request (a few hundred bytes). Preview deployed; production untouched.
 
 **If reverting:** drop the second `<link>`, the `.wordmark .mark` rule and the span.
+
+## 2026-09-09 — Promoted iteration 19 to production
+
+**Now:** oddments.design serves commit `b0d2d6c` (wordmark in Inter + Noto Sans Symbols 2). Deployment `oddments-8zrv1twmo-pabs-studio.vercel.app`. Byte-identical to `index.html` [VERIFIED: `curl | diff`].
+
+**Why:** Pablo, 2026-09-09: *"push live."*
+
+**If reverting:** `vercel rollback`.
