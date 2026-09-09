@@ -109,6 +109,14 @@
   @media (prefers-reduced-motion: reduce) {
     .controls .dot { transition: none; }
   }
+  /* Phones: everything a step larger. Clock at 1.4px per unit → numerals 14px. */
+  @media (max-width: 600px) {
+    .clock { width: 252px; }
+    .controls { gap: 8px; }
+    .controls button { font-size: 12px; padding: 7px 10px; }
+    .controls .dot { height: 6px; }
+    .controls button[aria-pressed="true"] .dot { width: 6px; margin-right: 10px; }
+  }
   .controls button:focus-visible {
     outline: 1px solid var(--ink);
     outline-offset: 2px;

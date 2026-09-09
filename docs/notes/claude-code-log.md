@@ -278,3 +278,15 @@ Decision 0003 has no auto-cycle; this is a Pablo addition.
 **Affects:** Public web. The holding page is now live at its official address.
 
 **If reverting:** `vercel domains rm oddments.design` and `vercel domains rm www.oddments.design` (detaches from the project; the registrations stay).
+
+## 2026-09-09 — Iteration 14: larger clock and buttons on phones
+
+**Was:** One size everywhere: clock 216px, buttons 10px type.
+
+**Now:** `@media (max-width: 600px)`: clock 252px (numerals 14px), buttons 12px type with 7px/10px padding, dot 6px with a 10px gap, 8px between buttons. Bottom margin unchanged. Checked at 375×812: five buttons span ~290px, clock centred.
+
+**Why:** Pablo, 2026-09-09: *"clock and button could be a little bigger on mobile."*
+
+**Affects:** `index.html` only. Preview deployed; production (oddments.design) untouched.
+
+**If reverting:** delete the `@media (max-width: 600px)` block.
