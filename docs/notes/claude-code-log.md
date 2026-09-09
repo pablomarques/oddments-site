@@ -438,3 +438,17 @@ Safari on macOS ignores SVG favicons and shows the touch icon instead. Open ques
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** remove the five `.tip` spans, the tooltip CSS block, and the `tip-local` IIFE.
+
+## 2026-09-09 — Iteration 23: AM/PM switch crossfades every surface
+
+**Was:** Only `body` background and text faded (300ms); the clock, numerals, buttons, capsule, pill and tooltips snapped to the new palette.
+
+**Now:** A `--tms` token (0ms at rest) drives colour transitions on body, hub and hands (`fill`), numerals, zone buttons (colour and background), their countdown fill, the capsule, the theme pill (background only; its 260ms slide is untouched), and the tooltips (background, text and tail). `applyTheme(theme, animate)` adds `html.theming` for 750ms on a user click, which sets `--tms: 700ms` and bumps the buttons' hover timing to match for that window. Initial load calls it without `animate`, so a remembered theme applies instantly with no flash. Easing is ease-in-out throughout.
+
+Verified [VERIFIED: computed `transition-duration` per element with and without the class]: 0s at rest, 0.7s during; pill 0.26s/0.7s; tooltip 0.15s/0.15s/0.7s/0.7s. The browser pane cannot play transitions while backgrounded, so no mid-fade capture.
+
+**Why:** Pablo, 2026-09-09: *"make the transitions from day to night a bit more animated and not so abrupt."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** remove the `--tms` / `html.theming` rules and the `animate` branch in `applyTheme`; restore `body`'s 300ms transition.
