@@ -602,3 +602,19 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Why:** Pablo, 2026-09-09: *"good push to live."*
 
 **If reverting:** `vercel rollback`.
+
+## 2026-09-10 — Iteration 34: weather tooltips on the city buttons
+
+**Was:** No tooltips (removed in Iteration 29).
+
+**Now:** LDN, NYC and SAO carry an empty `.tip` span that fills with current weather: temperature and one word, e.g. "18° Overcast". Source is Open-Meteo (`api.open-meteo.com/v1/forecast`, no key, CORS-open), one request for all three cities on load and every 15 minutes. WMO weather codes map to Clear / Cloudy / Overcast / Fog / Drizzle / Rain / Snow / Showers / Thunder. Units follow local convention: °F for New York, °C for London and São Paulo (`data-unit` on the button). The tooltip is the quiet design from Iteration 27 (pill on `--tip`, muted text, 3px tail, soft pop after a 180ms delay, hover-only); `--tip` is `#0A0A0A` at night and `#1C1C1E` by day, so no true black. `:empty` tooltips are hidden, so nothing shows until data arrives or if the request fails. YOU and ODD have no tooltip.
+
+This is the page's first runtime data request (fonts aside). Coordinates are city centres, hard-coded on the buttons.
+
+Verified [VERIFIED: API probe with curl; page fetch populates all three spans; no console errors].
+
+**Why:** Pablo, 2026-09-10: *"add weather of each city on roll over the city button? temperature and one word weather description?"* Local-units and no-YOU-tooltip are CC's choices.
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** commit `2e45921` is the last version without weather.
