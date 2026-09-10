@@ -642,3 +642,15 @@ Verified [VERIFIED: page fetch populates YOU/LDN/NYC/SAO; geocode probe returns 
 **Why:** Pablo, 2026-09-10: *"push live."*
 
 **If reverting:** `vercel rollback`.
+
+## 2026-09-10 — Iteration 36: PM ground darker
+
+**Was:** `--paper: #121212`, `--tip: #0A0A0A` at night.
+
+**Now:** `--paper: #0E0E0E`, `--tip: #060606`. Same 8-level gap between tooltip and ground as before. No true black. Button fills unchanged.
+
+**Why:** Pablo, 2026-09-10: *"can you make the background on pm darker."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** the two night tokens back to `#121212` / `#0A0A0A`.
