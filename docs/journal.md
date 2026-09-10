@@ -91,4 +91,6 @@ Later the same evening: favicon and Apple touch icon from the locked linear geom
 
 Late: tooltips tried, made subtle, then removed; wordmark back at 14.4px; SPO renamed SAO (a locked label in 0003 — flagged). Locked items Pablo has changed directly today, for SC to fold into the decision files: seconds-hand length (0002), caption removed, live updates through the wind, button set (YOU added), SPO→SAO, active-state styling (all 0003).
 
-Open from CC's side: exact colour values are estimated from the screenshot; the countdown fill grey is a single token; fate of the AM/PM toggle on the public page. `oddments.studio` now redirects to `.design`; the wordmark was removed again "for now" at the end of the session.
+Day palette rebuilt on Apple's light system greys, with near-black ink so the page has no true black anywhere. Promoted. oddments.design is current at commit `70a3d99`.
+
+Open from CC's side: night colour values are estimated from Pablo's screenshot; the countdown fill grey is a single token; fate of the AM/PM toggle on the public page. `oddments.studio` now redirects to `.design`; the wordmark was removed again "for now" at the end of the session.

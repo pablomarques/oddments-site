@@ -594,3 +594,11 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** `--ink` in the day block back to `#000000`.
+
+## 2026-09-09 — Promoted iteration 33 to production
+
+**Now:** oddments.design serves commit `70a3d99` (Apple light palette with near-black ink). Deployment `oddments-5y3bfoapk-pabs-studio.vercel.app`. Byte-identical to `index.html` [VERIFIED: `curl | diff`].
+
+**Why:** Pablo, 2026-09-09: *"good push to live."*
+
+**If reverting:** `vercel rollback`.
