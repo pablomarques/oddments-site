@@ -536,3 +536,15 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** commit `e25df67` is the last version with tooltips and no wordmark.
+
+## 2026-09-09 — Iteration 30: wordmark 20% smaller
+
+**Was:** Wordmark base size 18px.
+
+**Now:** 14.4px. The mark glyphs follow at 72% of that (10.4px).
+
+**Why:** Pablo, 2026-09-09: *"can you reduce the mark size by 20%."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** `font-size` back to 18px.
