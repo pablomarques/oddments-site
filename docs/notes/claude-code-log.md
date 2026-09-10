@@ -562,3 +562,11 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** one string.
+
+## 2026-09-09 — Promoted iteration 31 to production
+
+**Now:** oddments.design serves commit `c7e3363` (no tooltips, wordmark at 14.4px, SAO label, black-tooltip token gone). Deployment `oddments-hssispke1-pabs-studio.vercel.app`. Byte-identical to `index.html` [VERIFIED: `curl | diff`].
+
+**Why:** Pablo, 2026-09-09: *"push to live."*
+
+**If reverting:** `vercel rollback`.
