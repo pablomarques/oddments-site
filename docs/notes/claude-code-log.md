@@ -618,3 +618,19 @@ Verified [VERIFIED: API probe with curl; page fetch populates all three spans; n
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** commit `2e45921` is the last version without weather.
+
+## 2026-09-10 — Iteration 35: local weather on YOU; Celsius everywhere
+
+**Was:** Weather on LDN/NYC/SAO only; New York in °F.
+
+**Now:**
+- All temperatures in °C; the per-button `data-unit` is gone.
+- YOU has a weather tooltip. No geolocation prompt: the city is taken from the IANA zone id (`America/New_York` → "New York"), geocoded once via Open-Meteo's geocoding endpoint (`geocoding-api.open-meteo.com/v1/search`), and its coordinates are written onto the YOU button, which then joins the single weather request. If the zone id has no city part, or geocoding fails, YOU simply has no tooltip. Limitation: it is the zone's reference city, not the visitor's actual location — a visitor in Manchester gets London's weather.
+
+Verified [VERIFIED: page fetch populates YOU/LDN/NYC/SAO; geocode probe returns New York 40.714, -74.006; no console errors].
+
+**Why:** Pablo, 2026-09-10: *"can you add the users local weather? and lets show the temps always in Celsius."* Zone-city rather than a location prompt is CC's choice.
+
+**Affects:** `index.html` only. Second Open-Meteo endpoint in use. Preview deployed; production untouched.
+
+**If reverting:** commit `09a0788` (three-city weather, mixed units).

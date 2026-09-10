@@ -295,10 +295,10 @@
 </svg>
 
 <ul class="controls cycling" id="controls" aria-label="Time zone">
-  <li><button type="button" data-zone="local"             aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>YOU</span></button></li>
-  <li><button type="button" data-zone="Europe/London"     data-lat="51.5074" data-lon="-0.1278"  data-unit="celsius"    aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>LDN</span></button><span class="tip" role="tooltip"></span></li>
-  <li><button type="button" data-zone="America/New_York"  data-lat="40.7128" data-lon="-74.0060" data-unit="fahrenheit" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>NYC</span></button><span class="tip" role="tooltip"></span></li>
-  <li><button type="button" data-zone="America/Sao_Paulo" data-lat="-23.5505" data-lon="-46.6333" data-unit="celsius"   aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>SAO</span></button><span class="tip" role="tooltip"></span></li>
+  <li><button type="button" data-zone="local"             aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>YOU</span></button><span class="tip" role="tooltip"></span></li>
+  <li><button type="button" data-zone="Europe/London"     data-lat="51.5074" data-lon="-0.1278"  aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>LDN</span></button><span class="tip" role="tooltip"></span></li>
+  <li><button type="button" data-zone="America/New_York"  data-lat="40.7128" data-lon="-74.0060" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>NYC</span></button><span class="tip" role="tooltip"></span></li>
+  <li><button type="button" data-zone="America/Sao_Paulo" data-lat="-23.5505" data-lon="-46.6333" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>SAO</span></button><span class="tip" role="tooltip"></span></li>
   <li><button type="button" data-zone="ODD"               aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>ODD</span></button></li>
 </ul>
 
@@ -508,10 +508,12 @@
   });
 
   // --- Weather (Open-Meteo, no key) -----------------------------------------
-  // One request for all three cities, refreshed every 15 minutes. Tooltip stays
-  // empty (and hidden) until data arrives or if the request fails.
+  // One request for every button with coordinates, refreshed every 15 minutes.
+  // Tooltip stays empty (and hidden) until data arrives or if a request fails.
+  // All temperatures in Celsius.
   var WEATHER_MS = 15 * 60 * 1000;
-  var cityButtons = buttons.filter(function (b) { return b.dataset.lat; });
+  var localButton = buttons[0];
+  function cityButtons() { return buttons.filter(function (b) { return b.dataset.lat; }); }
   function weatherWord(code) {
     if (code === 0 || code === 1) return 'Clear';
     if (code === 2) return 'Cloudy';
@@ -526,25 +528,40 @@
     return '';
   }
   function loadWeather() {
-    if (!cityButtons.length || !window.fetch) return;
-    var lat = cityButtons.map(function (b) { return b.dataset.lat; }).join(',');
-    var lon = cityButtons.map(function (b) { return b.dataset.lon; }).join(',');
+    var cities = cityButtons();
+    if (!cities.length || !window.fetch) return;
+    var lat = cities.map(function (b) { return b.dataset.lat; }).join(',');
+    var lon = cities.map(function (b) { return b.dataset.lon; }).join(',');
     var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + lat + '&longitude=' + lon +
               '&current=temperature_2m,weather_code&temperature_unit=celsius';
     fetch(url).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
       if (!data) return;
       var list = Array.isArray(data) ? data : [data];
-      cityButtons.forEach(function (b, i) {
+      cities.forEach(function (b, i) {
         var d = list[i], tip = b.nextElementSibling;
         if (!d || !d.current || !tip) return;
-        var c = d.current.temperature_2m;
-        var t = b.dataset.unit === 'fahrenheit' ? Math.round(c * 9 / 5 + 32) : Math.round(c);
+        var t = Math.round(d.current.temperature_2m);
         var w = weatherWord(d.current.weather_code);
         tip.textContent = t + '\u00B0' + (w ? ' ' + w : '');
       });
     }).catch(function () {});
   }
-  loadWeather();
+
+  // YOU: no location prompt. Take the city from the IANA zone id and geocode it
+  // with Open-Meteo, then fold it into the same weather request.
+  function locateLocal() {
+    if (!window.fetch || LOCAL_ZONE.indexOf('/') < 0) { loadWeather(); return; }
+    var city = LOCAL_ZONE.split('/').pop().replace(/_/g, ' ');
+    var url = 'https://geocoding-api.open-meteo.com/v1/search?count=1&name=' + encodeURIComponent(city);
+    fetch(url).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      var hit = data && data.results && data.results[0];
+      if (hit) {
+        localButton.dataset.lat = hit.latitude;
+        localButton.dataset.lon = hit.longitude;
+      }
+    }).catch(function () {}).then(loadWeather);
+  }
+  locateLocal();
   setInterval(loadWeather, WEATHER_MS);
 
   markPressed();
