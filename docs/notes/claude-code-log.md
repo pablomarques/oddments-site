@@ -508,3 +508,17 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** restore the `.tip` block from commit `1f18ea3`.
+
+## 2026-09-09 — Iteration 28: tooltip fill black
+
+**Was:** Tooltip pill and tail in the countdown-fill grey.
+
+**Now:** New token `--tip: #000000`, used for the pill fill and the tail, in both palettes. Text stays `--muted`. Page ground unchanged at `#121212`.
+
+**Note:** CC first read "black background maybe" as the page ground and started that change; Pablo stopped it. The rejected command had already written `#000000` to `--paper` and pushed a preview of it (`oddments-fbkgns97c`) before the stop landed. That file change was reverted with `git checkout` before the tooltip edit; nothing from it was committed or promoted.
+
+**Why:** Pablo, 2026-09-09: *"black background for the tooltips not the page."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** point the two `var(--tip)` uses back at `--progress` and drop the token.

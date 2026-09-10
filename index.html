@@ -15,6 +15,7 @@
     --button: #1C1C1C;
     --button-hover: #222222;
     --progress: #2C2C2C;
+    --tip: #000000;
     --accent: #E24B4A;
   }
   /* Theme crossfade. --tms is 0 at rest so nothing animates on load; html.theming sets it
@@ -159,7 +160,7 @@
     transform: translate(-50%, 4px) scale(0.94);
     padding: 4px 7px;
     border-radius: 999px;
-    background: var(--progress);
+    background: var(--tip);
     color: var(--muted);
     font-size: 10px;
     line-height: 1;
@@ -179,7 +180,7 @@
     left: 50%;
     margin-left: -3px;
     border: 3px solid transparent;
-    border-top-color: var(--progress);
+    border-top-color: var(--tip);
     border-bottom: 0;
     transition: border-top-color var(--tms) ease-in-out;
   }
