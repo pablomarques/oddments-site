@@ -93,4 +93,6 @@ Late: tooltips tried, made subtle, then removed; wordmark back at 14.4px; SPO re
 
 Day palette rebuilt on Apple's light system greys, with near-black ink so the page has no true black anywhere. Promoted. oddments.design is current at commit `70a3d99`.
 
-Open from CC's side: night colour values are estimated from Pablo's screenshot; the countdown fill grey is a single token; fate of the AM/PM toggle on the public page. `oddments.studio` now redirects to `.design`; the wordmark was removed again "for now" at the end of the session.
+2026-09-10: weather tooltips. Rollover on YOU/LDN/NYC/SAO shows current temperature and one word (Open-Meteo, keyless, one request every 15 min; YOU located from the zone's city rather than a permission prompt). Celsius everywhere. Promoted; oddments.design is current at `ad814dc`. The page now makes live data requests, which is a new kind of dependency for the holding page — worth a line in a decision file if it stays.
+
+Open from CC's side: night colour values are estimated from Pablo's screenshot; the countdown fill grey is a single token; fate of the AM/PM toggle on the public page; YOU weather is zone-city, not true location. `oddments.studio` now redirects to `.design`; the wordmark was removed again "for now" at the end of the session.

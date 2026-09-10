@@ -634,3 +634,11 @@ Verified [VERIFIED: page fetch populates YOU/LDN/NYC/SAO; geocode probe returns 
 **Affects:** `index.html` only. Second Open-Meteo endpoint in use. Preview deployed; production untouched.
 
 **If reverting:** commit `09a0788` (three-city weather, mixed units).
+
+## 2026-09-10 — Promoted iteration 35 to production
+
+**Now:** oddments.design serves commit `ad814dc` (weather tooltips on YOU/LDN/NYC/SAO, Celsius). Deployment `oddments-3is497yn7-pabs-studio.vercel.app`. Byte-identical to `index.html` [VERIFIED: `curl | diff`].
+
+**Why:** Pablo, 2026-09-10: *"push live."*
+
+**If reverting:** `vercel rollback`.
