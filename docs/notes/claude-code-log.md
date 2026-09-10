@@ -488,3 +488,11 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** `--paper` back to `#141414`.
+
+## 2026-09-09 — Promoted iteration 26 to production
+
+**Now:** oddments.design serves commit `1f18ea3` (tooltips with pop-in, AM/PM crossfade, night ground `#121212`). Deployment `oddments-cgus8ng48-pabs-studio.vercel.app`. Byte-identical to `index.html` [VERIFIED: `curl | diff`].
+
+**Why:** Pablo, 2026-09-09: *"push to live."*
+
+**If reverting:** `vercel rollback`.
