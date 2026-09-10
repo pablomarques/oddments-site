@@ -522,3 +522,17 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** point the two `var(--tip)` uses back at `--progress` and drop the token.
+
+## 2026-09-09 — Iteration 29: tooltips removed; wordmark back at 18px
+
+**Was:** Tooltips on the zone buttons (Iterations 22–28). No wordmark since Iteration 20.
+
+**Now:**
+- Tooltips gone entirely: the five `.tip` spans, the tooltip CSS, the YOU-city IIFE and the `--tip` token.
+- Wordmark restored exactly as Iteration 19 left it (Inter Medium for "ments", Noto Sans Symbols 2 subset for ●◗◗ at 72%, top-left at the 32px corner), with the base size raised from 12px to 18px — 50% bigger as asked; the mark glyphs scale with it (12.96px). It also now takes the theme crossfade. The four font `<link>`s return, so the page makes two external font requests again.
+
+**Why:** Pablo, 2026-09-09: *"i think we can remove the tool tips, when you do that can you bring back the mark where it was yesterday and just make it 50% bigger than it was."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** commit `e25df67` is the last version with tooltips and no wordmark.
