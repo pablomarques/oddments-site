@@ -570,3 +570,15 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Why:** Pablo, 2026-09-09: *"push to live."*
 
 **If reverting:** `vercel rollback`.
+
+## 2026-09-09 — Iteration 32: day palette on Apple's light system colours
+
+**Was:** Day palette was the night one mirrored (warm off-white `#ECEAE5` ground, `#161616` ink, warm greys).
+
+**Now:** Apple's light system palette: ground `#F2F2F7` (systemGroupedBackground), ink `#000000` (label), muted `#8E8E93` (systemGray), button `#E5E5EA` (systemGray5), hover `#D1D1D6` (systemGray4), countdown `#C7C7CC` (systemGray3). Accent stays the Oddments red, not Apple blue. Night palette untouched.
+
+**Why:** Pablo, 2026-09-09: *"for the light version use apple usual interface colours."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** restore the six day tokens from commit `1701470`.

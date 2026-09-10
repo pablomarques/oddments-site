@@ -25,13 +25,14 @@
      for the duration of a switch. Hover/press timings keep their own faster values. */
   :root { --tms: 0ms; }
   html.theming { --tms: 700ms; }
+  /* Day: Apple's light system palette. */
   :root[data-theme="day"] {
-    --paper: #ECEAE5;
-    --ink: #161616;
-    --muted: #8C8C8C;
-    --button: #E3E1DC;
-    --button-hover: #DAD8D2;
-    --progress: #CFCDC6;
+    --paper: #F2F2F7;          /* systemGroupedBackground */
+    --ink: #000000;            /* label */
+    --muted: #8E8E93;          /* systemGray */
+    --button: #E5E5EA;         /* systemGray5 */
+    --button-hover: #D1D1D6;   /* systemGray4 */
+    --progress: #C7C7CC;       /* systemGray3 */
   }
   html, body { height: 100%; margin: 0; }
   body {
