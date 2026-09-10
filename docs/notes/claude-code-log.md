@@ -496,3 +496,15 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Why:** Pablo, 2026-09-09: *"push to live."*
 
 **If reverting:** `vercel rollback`.
+
+## 2026-09-09 — Iteration 27: tooltips made subtle
+
+**Was:** Inverted pill (ink fill, paper text), 4px tail, 0.8→1 scale pop with a strong overshoot, immediate.
+
+**Now:** Pill uses the countdown-fill grey (`--progress`) with muted text, so it reads as a quieter cousin of the buttons rather than a label shouting over them. 3px tail in the same grey. Rest state 0.94 scale, 4px low; enters over 300ms on a soft-settle curve with almost no overshoot, opacity 220ms, both after a 180ms delay so a cursor passing across the row does not trigger a chain of tooltips. Padding tightened to 4px/7px. Exit unchanged (120ms plain fade, no delay).
+
+**Why:** Pablo, 2026-09-09: *"can we make the tool tips way more subtle."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** restore the `.tip` block from commit `1f18ea3`.
