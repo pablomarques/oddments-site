@@ -89,4 +89,6 @@ The AM/PM toggle became a vertical capsule with a sliding pill (Pablo's design, 
 
 Later the same evening: favicon and Apple touch icon from the locked linear geometry; rollover tooltips (inverted pill, tail, pop-in); the AM/PM switch now crossfades every surface over 700ms; night ground darkened twice to `#121212`. All promoted; oddments.design is current as of the last entry in the CC log.
 
+Late: tooltips tried, made subtle, then removed; wordmark back at 14.4px; SPO renamed SAO (a locked label in 0003 — flagged). Locked items Pablo has changed directly today, for SC to fold into the decision files: seconds-hand length (0002), caption removed, live updates through the wind, button set (YOU added), SPO→SAO, active-state styling (all 0003).
+
 Open from CC's side: exact colour values are estimated from the screenshot; the countdown fill grey is a single token; fate of the AM/PM toggle on the public page. `oddments.studio` now redirects to `.design`; the wordmark was removed again "for now" at the end of the session.

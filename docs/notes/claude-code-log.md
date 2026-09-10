@@ -548,3 +548,17 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** `font-size` back to 18px.
+
+## 2026-09-09 — Iteration 31: SPO → SAO
+
+**Was:** Third city button labelled SPO.
+
+**Now:** Labelled SAO (the IATA metropolitan code for São Paulo). Zone id, order and behaviour unchanged.
+
+**⚠ Touches a locked decision.** Decision 0003 specifies the labels as "LDN, NYC, SPO, ODD" and says Pablo specified them. Changed on Pablo's direct instruction; SC to amend 0003 together with the YOU addition and the other flagged items.
+
+**Why:** Pablo, 2026-09-09: *"change SPO to SAO which is the actual code for sao paulo."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** one string.
