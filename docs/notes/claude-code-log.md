@@ -582,3 +582,15 @@ Verified [VERIFIED: computed `transition-duration` per element with and without 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** restore the six day tokens from commit `1701470`.
+
+## 2026-09-09 — Iteration 33: no true blacks
+
+**Was:** Day ink `#000000`.
+
+**Now:** Day ink `#1C1C1E`. No `#000` anywhere in the page [VERIFIED: grep]. Night ground remains `#121212`.
+
+**Why:** Pablo, 2026-09-09: *"tone the blacks down a bit so there are no true blacks."*
+
+**Affects:** `index.html` only. Preview deployed; production untouched.
+
+**If reverting:** `--ink` in the day block back to `#000000`.
