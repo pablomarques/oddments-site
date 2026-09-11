@@ -654,3 +654,11 @@ Verified [VERIFIED: page fetch populates YOU/LDN/NYC/SAO; geocode probe returns 
 **Affects:** `index.html` only. Preview deployed; production untouched.
 
 **If reverting:** the two night tokens back to `#121212` / `#0A0A0A`.
+
+## 2026-09-11 — Promoted iteration 36 to production
+
+**Now:** oddments.design serves commit `a20c5e3` (PM ground `#0E0E0E`). Deployment `oddments-hz8kfizr7-pabs-studio.vercel.app`. Byte-identical to `index.html` [VERIFIED: `curl | diff`].
+
+**Why:** Pablo, 2026-09-11: *"push live."*
+
+**If reverting:** `vercel rollback`.
